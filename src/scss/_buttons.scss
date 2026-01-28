@@ -1,0 +1,43 @@
+@use 'variables.scss' as *;
+
+.btn-create-style,
+.btn-cancel-style {
+  padding: 8px 22px;
+  font-weight: 500;
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+
+.btn-create-style {
+  width: 6rem;
+  background-color: $create-btn-color;
+  border: 1px solid $create-btn-color;
+  color: #fff;
+  &:hover {
+    background-color: $create-btn-hover-color;
+    border-color: $create-btn-hover-color;
+  }
+}
+
+.btn-cancel-style {
+  background-color: $error-btn-color;
+  border: 1px solid $error-btn-color;
+  color: #fff;
+  &:hover {
+    background-color: $error-btn-hover-color;
+    border-color: $error-btn-hover-color;
+    color: #fff;
+  }
+}
