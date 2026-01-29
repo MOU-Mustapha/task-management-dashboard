@@ -1,17 +1,17 @@
 <p-dialog
   header="Error"
   [style]="{ width: '25rem' }"
-  [visible]="errorService.active()"
+  [visible]="active"
   modal
   [closable]="false"
   [draggable]="false"
 >
   <div class="d-flex align-items-center gap-2">
     <img src="assets/icons/error.svg" alt="error-icon" />
-    <p class="m-0">{{ errorService.error()?.message }}</p>
+    <p class="m-0">{{ errorMessage }}</p>
   </div>
 
   <ng-template pTemplate="footer">
-    <button class="btn-cancel-style" (click)="close()">Ok</button>
+    <button class="btn-cancel" (click)="close()">Ok</button>
   </ng-template>
 </p-dialog>

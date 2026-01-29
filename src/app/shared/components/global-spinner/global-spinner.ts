@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { FacadeService } from '../../../core/services/facade.service';
+import { AppFacadeService } from '../../../core/services/app.facade.service';
 
 @Component({
   selector: 'app-global-spinner',
@@ -9,6 +9,6 @@ import { FacadeService } from '../../../core/services/facade.service';
   styleUrl: './global-spinner.scss',
 })
 export class GlobalSpinner {
-  private readonly facade = inject(FacadeService);
-  loading = this.facade.loadingService.loading;
+  private readonly appFacade = inject(AppFacadeService);
+  loading = this.appFacade.loadingService.loading;
 }

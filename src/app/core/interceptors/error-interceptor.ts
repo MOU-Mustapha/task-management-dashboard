@@ -1,11 +1,11 @@
 import { HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, retry, throwError, timer } from 'rxjs';
-import { FacadeService } from '../services/facade.service';
+import { AppFacadeService } from '../services/app.facade.service';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const requests: HttpRequest<unknown>[] = [];
-  const facade = inject(FacadeService);
+  const appFacade = inject(AppFacadeService);
   requests.push(req);
   return next(req).pipe(
     retry({
@@ -18,8 +18,8 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       },
     }),
     catchError((err) => {
-      facade.loadingService.reset();
-      facade.errorService.show({
+      appFacade.loadingService.reset();
+      appFacade.errorService.show({
         message: err.error?.message || 'Something went wrong. Please try again.',
         status: err.status,
       });

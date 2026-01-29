@@ -1,6 +1,7 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
@@ -20,6 +21,13 @@ export const appConfig: ApplicationConfig = {
           darkModeSelector: false,
         },
       },
+    }),
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: '/i18/',
+        suffix: '.json',
+      }),
+      fallbackLang: 'en',
     }),
   ],
 };

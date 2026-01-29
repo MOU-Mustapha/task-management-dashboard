@@ -1,7 +1,7 @@
 @use 'variables' as *;
 
 body {
-  font-family: 'Roboto', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
   box-sizing: border-box;
   scroll-behavior: smooth;
   margin: 0;
@@ -11,6 +11,7 @@ body {
     outline: none;
     box-shadow: none;
   }
+  overflow: hidden;
 }
 
 a {
@@ -29,13 +30,13 @@ a {
   background-color: #fff;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #2692fe;
+  background-color: $create-btn-color;
   border-radius: 1rem;
   -webkit-border-radius: 1rem;
   -moz-border-radius: 1rem;
   -ms-border-radius: 1rem;
   -o-border-radius: 1rem;
   &:hover {
-    background-color: #555;
+    background-color: $create-btn-hover-color;
   }
 }

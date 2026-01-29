@@ -1,13 +1,14 @@
 @use 'variables.scss' as *;
 
-.btn-create-style,
-.btn-cancel-style {
+.btn-create,
+.btn-cancel {
   padding: 8px 22px;
   font-weight: 500;
   &:focus {
     outline: none;
     box-shadow: none;
   }
+  font-size: 13.5px;
   border-radius: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -20,7 +21,7 @@
   -o-transition: 0.3s;
 }
 
-.btn-create-style {
+.btn-create {
   width: 6rem;
   background-color: $create-btn-color;
   border: 1px solid $create-btn-color;
@@ -31,7 +32,7 @@
   }
 }
 
-.btn-cancel-style {
+.btn-cancel {
   background-color: $error-btn-color;
   border: 1px solid $error-btn-color;
   color: #fff;

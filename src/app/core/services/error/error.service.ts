@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { GlobalError } from '../../../models/error.model';
+import { GlobalError } from '../../../shared/models/error.model';
 
 @Injectable({
   providedIn: 'root',

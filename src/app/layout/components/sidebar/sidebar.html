@@ -1,0 +1,14 @@
+<div class="sidebar">
+  @for (module of modules; track $index; let i = $index) {
+    <a
+      class="d-flex align-items-center gap-2"
+      [routerLink]="[module.route]"
+      [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{ exact: i === 0 ? true : false }"
+    >
+      <img width="15px" [src]="module.icon" [alt]="module.name" />
+      <span>{{ module.name | translate }}</span>
+    </a>
+  }
+  <button class="btn-create">+ {{ 'CreateNewTask' | translate }}</button>
+</div>

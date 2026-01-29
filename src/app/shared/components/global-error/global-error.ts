@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-import { ErrorService } from '../../../core/services/error/error.service';
+import { AppFacadeService } from '../../../core/services/app.facade.service';
 
 @Component({
   selector: 'app-global-error',
@@ -10,8 +10,10 @@ import { ErrorService } from '../../../core/services/error/error.service';
   styleUrl: './global-error.scss',
 })
 export class GlobalError {
-  public readonly errorService = inject(ErrorService);
+  public readonly appFacade = inject(AppFacadeService);
+  readonly active = this.appFacade.errorService.active();
+  readonly errorMessage = this.appFacade.errorService.error()?.message;
   close() {
-    this.errorService.clear();
+    this.appFacade.errorService.clear();
   }
 }
