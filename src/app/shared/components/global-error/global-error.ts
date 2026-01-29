@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { AppFacadeService } from '../../../core/services/app.facade.service';
@@ -8,6 +8,7 @@ import { AppFacadeService } from '../../../core/services/app.facade.service';
   imports: [DialogModule, ButtonModule],
   templateUrl: './global-error.html',
   styleUrl: './global-error.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GlobalError {
   public readonly appFacade = inject(AppFacadeService);

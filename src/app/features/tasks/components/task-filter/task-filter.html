@@ -1,1 +1,39 @@
-<p>task-filter works!</p>
+<div class="task-filter d-flex align-items-center justify-content-between">
+  <div class="left d-flex align-items-center gap-3">
+    <button class="reset" (click)="clearFilters()">
+      <img [title]="'ResetFilters' | translate" src="assets/icons/reset.svg" alt="reset-filters" />
+    </button>
+    <nav class="tabs d-flex gap-2">
+      @for (status of statusTabs; track status.id) {
+        <button
+          class="tab-btn"
+          (click)="onTabClick(status.id)"
+          [class.active]="selectedStatus === status.id"
+          [aria-pressed]="selectedStatus === status.id"
+        >
+          {{ status.label | translate }}
+        </button>
+      }
+    </nav>
+  </div>
+  <div class="right d-flex align-items-center gap-2">
+    <div class="dropdown">
+      <p-select
+        [options]="priorityOptions"
+        [(ngModel)]="selectedPriority"
+        optionValue="value"
+        (onChange)="onPriorityChange($event.value)"
+      >
+        <ng-template pTemplate="item" let-option>
+          {{ option.label | translate }}
+        </ng-template>
+        <ng-template pTemplate="selectedItem" let-option>
+          {{ option.label | translate }}
+        </ng-template>
+      </p-select>
+    </div>
+    <button class="btn-create" (click)="onNewTaskClick()">
+      + {{ 'CreateNewTask' | translate }}
+    </button>
+  </div>
+</div>

@@ -1,1 +1,18 @@
-<p>task-column works!</p>
+<div class="column">
+  <div class="column-header">
+    <h3 class="title">{{ title | translate }}</h3>
+    <span class="count">{{ tasksCount }}</span>
+  </div>
+  <div class="tasks-container">
+    @if (tasksCount > 0) {
+      @for (task of tasks; track task.id) {
+        <app-task-card [task]="task" />
+      }
+    } @else {
+      <div class="empty-state">
+        <p class="empty-icon">📭</p>
+        <p class="empty-text">No tasks found.</p>
+      </div>
+    }
+  </div>
+</div>

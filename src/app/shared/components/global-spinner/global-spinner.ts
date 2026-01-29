@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { AppFacadeService } from '../../../core/services/app.facade.service';
 
@@ -7,8 +7,8 @@ import { AppFacadeService } from '../../../core/services/app.facade.service';
   imports: [ProgressSpinnerModule],
   templateUrl: './global-spinner.html',
   styleUrl: './global-spinner.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GlobalSpinner {
-  private readonly appFacade = inject(AppFacadeService);
-  loading = this.appFacade.loadingService.loading;
+  public readonly appFacade = inject(AppFacadeService);
 }

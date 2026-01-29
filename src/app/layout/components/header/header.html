@@ -7,7 +7,12 @@
   </div>
   <div class="center col-md-4">
     <img width="13px" src="assets/icons/search.svg" alt="Search" />
-    <input id="search" type="text" [placeholder]="'searchPlaceHolder' | translate" />
+    <input
+      id="search"
+      type="search"
+      [placeholder]="'searchPlaceHolder' | translate"
+      (input)="onSearch($event.target.value)"
+    />
   </div>
   <div class="right col-md-4 d-flex align-items-center justify-content-end">
     <button (click)="toggleLang()" type="button">

@@ -8,5 +8,14 @@
   "Analytics": "Analytics",
   "Team": "Team",
   "Settings": "Settings",
-  "CreateNewTask": "New Task"
+  "CreateNewTask": "New Task",
+  "All": "All",
+  "InProgress": "In Progress",
+  "ToDo": "To Do",
+  "Done": "Done",
+  "Priority": "Priority",
+  "High": "High",
+  "Medium": "Medium",
+  "Low": "Low",
+  "ResetFilters": "Reset Filters"
 }

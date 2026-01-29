@@ -1,11 +1,41 @@
-<!-- <p-card>
-  <div class="priority">{{ task.priority }}</div>
-  <h4>{{ task.title }}</h4>
-  <p>{{ task.description }}</p>
-
-  <footer>
-    <span>{{ task.assignee.name }}</span>
-    <button (click)="edit.emit(task)">Edit</button>
-    <button (click)="remove.emit(task.id)">Delete</button>
-  </footer>
-</p-card> -->
+<div
+  class="task-card"
+  [class.overdue]="isOverdue"
+  [class.completed]="task.status === 'done'"
+  [class.in-progress]="task.status === 'in_progress'"
+  [class.todo]="task.status === 'todo'"
+>
+  <div class="card-top">
+    <div class="priority" [ngClass]="priorityClass">{{ task.priority | uppercase }}</div>
+    <div class="drag">
+      <!-- <button class="menu-btn" (click)="onEdit()" title="Edit">...</button> -->
+      <img src="assets/icons/actions.png" alt="actions" />
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="title" [title]="task.title">{{ task.title }}</div>
+    <p class="desc" [title]="task.description">{{ task.description }}</p>
+    <div class="card-meta">
+      @if (!isOverdue && task.status !== 'done') {
+        <img src="assets/icons/calendar.png" alt="Calendar" />
+      }
+      @if (task.status === 'done') {
+        <img src="assets/icons/tasks.png" alt="Calendar" />
+      }
+      <span>{{ dueRelative }}</span>
+    </div>
+    @if (task.tags.length) {
+      <div class="tags">
+        @for (tag of task.tags; track $index) {
+          <span>{{ tag }}</span>
+        }
+      </div>
+    }
+  </div>
+  <div class="card-footer">
+    <div class="assignee">
+      <div class="avatar">{{ task.assignee.avatar }}</div>
+      <div class="assignee-name">@{{ formattedAssignee }}</div>
+    </div>
+  </div>
+</div>

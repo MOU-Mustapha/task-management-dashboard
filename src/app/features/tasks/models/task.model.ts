@@ -16,8 +16,11 @@ export interface Task {
   status: TaskStatus;
   priority: TaskPriority;
   dueDate: string;
+  completedAt: string;
   assignee: Assignee;
   tags: string[];
   createdAt: string;
   updatedAt: string;
 }
+
+export type CreateTaskPayload = Omit<Task, 'id' | 'createdAt' | 'updatedAt'>;

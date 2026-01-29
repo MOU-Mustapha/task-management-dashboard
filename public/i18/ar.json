@@ -8,5 +8,14 @@
   "Analytics": "التحليلات",
   "Team": "الفريق",
   "Settings": "الإعدادات",
-  "CreateNewTask": "مهمة جديدة"
+  "CreateNewTask": "مهمة جديدة",
+  "All": "الكل",
+  "InProgress": "قيد التنفيذ",
+  "ToDo": "قيد الانتظار",
+  "Done": "مكتمل",
+  "Priority": "الأولوية",
+  "High": "عالي",
+  "Medium": "متوسط",
+  "Low": "منخفض",
+  "ResetFilters": "إعادة الضبط"
 }
