@@ -71,7 +71,7 @@ export class TasksFacade {
       UpdatedAt: new Date().toISOString(),
       completedAt: newStatus === 'done' ? new Date().toISOString() : '',
     };
-    return this.tasksApi.updateTask(updatedTask);
+    return this.update(updatedTask);
   }
   // Get All Assignees From Tasks
   readonly assignees = computed<Assignee[]>(() => {

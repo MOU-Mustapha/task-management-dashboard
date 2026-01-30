@@ -9,7 +9,6 @@
           id="title"
           [placeholder]="'Title' | translate"
           formControlName="title"
-          tabindex="-1"
         />
         <app-field-error
           [displayError]="validationService.isFieldValid('title')"
@@ -30,7 +29,6 @@
           id="desc"
           [placeholder]="'Description' | translate"
           formControlName="description"
-          tabindex="-1"
         />
         <app-field-error
           [displayError]="validationService.isFieldValid('description')"
@@ -47,7 +45,6 @@
           id="status"
           [placeholder]="'Status' | translate"
           formControlName="status"
-          tabindex="-1"
         />
       </div>
     </div>
@@ -61,7 +58,6 @@
           formControlName="priority"
           inputId="priority"
           appendTo="body"
-          tabindex="-1"
         >
           <ng-template pTemplate="item" let-option>
             {{ option.label | translate }}
@@ -88,7 +84,6 @@
             inputId="due-date"
             [placeholder]="'DueDate' | translate"
             appendTo="body"
-            tabindex="-1"
             dateFormat="dd-mm-yy"
             dataType="date"
           />
@@ -109,7 +104,6 @@
           id="assignee"
           inputId="assignee"
           appendTo="body"
-          tabindex="-1"
         >
           <ng-template pTemplate="item" let-option>
             {{ option.name | translate }}
@@ -136,7 +130,6 @@
                 name="tags"
                 id="tags"
                 [placeholder]="'Tag' | translate"
-                tabindex="-1"
                 (input)="onTagInputChange($event.target.value)"
               />
               <app-field-error

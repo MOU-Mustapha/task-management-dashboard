@@ -23,7 +23,7 @@
       "id": "task-002",
       "title": "Update documentation",
       "description": "Review and update API documentation for v2.0 release",
-      "status": "in_progress",
+      "status": "todo",
       "priority": "medium",
       "dueDate": "2026-02-02",
       "assignee": {
@@ -37,7 +37,7 @@
       ],
       "createdAt": "2026-01-25T16:26:16.810Z",
       "updatedAt": "2026-01-27T16:26:16.810Z",
-      "UpdatedAt": "2026-01-30T21:00:03.898Z",
+      "UpdatedAt": "2026-01-30T21:06:13.730Z",
       "completedAt": ""
     },
     {
@@ -334,6 +334,27 @@
       ],
       "createdAt": "2026-01-14T16:26:16.810Z",
       "updatedAt": "2026-01-23T16:26:16.810Z"
+    },
+    {
+      "id": "4492beac-b6e3-4b8b-8d6b-0a6991ddce7a",
+      "title": "New Task",
+      "description": "test new task",
+      "status": "todo",
+      "priority": "high",
+      "dueDate": "Tue Feb 10 2026 00:00:00 GMT+0200 (Eastern European Standard Time)",
+      "assignee": {
+        "id": "user-004",
+        "name": "Emily Davis",
+        "avatar": "ED",
+        "email": "emily.davis@company.com"
+      },
+      "tags": [
+        "Critical"
+      ],
+      "createdAt": "Fri Jan 30 2026 23:09:37 GMT+0200 (Eastern European Standard Time)",
+      "updatedAt": "",
+      "completedAt": "",
+      "UpdatedAt": "2026-01-30T21:11:05.716Z"
     }
   ],
   "meta": {
