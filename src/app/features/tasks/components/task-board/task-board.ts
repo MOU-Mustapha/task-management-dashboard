@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { TaskColumn } from '../task-column/task-column';
 import { Task } from '../../models/task.model';
 import { TaskStatus } from '../../models/task.model';
+import { transferArrayItem } from '@angular/cdk/drag-drop';
+import { TasksFacade } from '../../services/tasks.facade';
 
 @Component({
   selector: 'app-task-board',
@@ -11,6 +13,7 @@ import { TaskStatus } from '../../models/task.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskBoard {
+  private readonly tasksFacade = inject(TasksFacade);
   @Input({ required: true }) todo!: Task[];
   @Input({ required: true }) inProgress!: Task[];
   @Input({ required: true }) done!: Task[];
@@ -30,5 +33,22 @@ export class TaskBoard {
       default:
         return [];
     }
+  }
+  getConnectedColumnIds(columnStatus: TaskStatus): string[] {
+    return this.columns.filter((c) => c.status !== columnStatus).map((c) => 'column-' + c.status);
+  }
+  onTaskDropped(event: {
+    previousStatus: string;
+    targetStatus: string;
+    task: Task;
+    previousIndex: number;
+    currentIndex: number;
+  }) {
+    const { previousStatus, targetStatus, task, previousIndex, currentIndex } = event;
+    if (previousStatus === targetStatus) return;
+    const prevList = this.getTasksByStatus(previousStatus as TaskStatus);
+    const targetList = this.getTasksByStatus(targetStatus as TaskStatus);
+    transferArrayItem(prevList, targetList, previousIndex, currentIndex);
+    this.tasksFacade.updateTaskStatus(task, targetStatus as TaskStatus).subscribe();
   }
 }

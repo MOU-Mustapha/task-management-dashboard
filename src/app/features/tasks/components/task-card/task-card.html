@@ -1,5 +1,7 @@
 <div
   class="task-card"
+  cdkDrag
+  [cdkDragData]="task"
   [class.overdue]="isOverdue"
   [class.completed]="task.status === 'done'"
   [class.in-progress]="task.status === 'in_progress'"
@@ -7,7 +9,7 @@
 >
   <div class="card-top">
     <div class="priority" [ngClass]="priorityClass">{{ task.priority | uppercase }}</div>
-    <div class="drag">
+    <div class="drag" cdkDragHandle>
       <img src="assets/icons/actions.png" alt="actions" />
     </div>
   </div>

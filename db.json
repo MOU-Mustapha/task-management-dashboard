@@ -23,7 +23,7 @@
       "id": "task-002",
       "title": "Update documentation",
       "description": "Review and update API documentation for v2.0 release",
-      "status": "todo",
+      "status": "in_progress",
       "priority": "medium",
       "dueDate": "2026-02-02",
       "assignee": {
@@ -36,7 +36,9 @@
         "Documentation"
       ],
       "createdAt": "2026-01-25T16:26:16.810Z",
-      "updatedAt": "2026-01-27T16:26:16.810Z"
+      "updatedAt": "2026-01-27T16:26:16.810Z",
+      "UpdatedAt": "2026-01-30T21:00:03.898Z",
+      "completedAt": ""
     },
     {
       "id": "task-003",

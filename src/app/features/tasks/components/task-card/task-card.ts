@@ -4,10 +4,11 @@ import { TasksFacade } from '../../services/tasks.facade';
 import { CommonModule } from '@angular/common';
 import { TaskDialogService } from '../../services/task-dialog.service';
 import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/confirm-dialog';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-task-card',
-  imports: [CommonModule, ConfirmDialog],
+  imports: [CommonModule, ConfirmDialog, DragDropModule],
   templateUrl: './task-card.html',
   styleUrl: './task-card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,6 +16,7 @@ import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/conf
 export class TaskCard {
   private readonly tasksFacade = inject(TasksFacade);
   private readonly taskDialogService = inject(TaskDialogService);
+  isDragging: boolean = false;
   showDeleteDialog: boolean = false;
   @Input({ required: true }) task!: Task;
   get priorityClass(): string {

@@ -1,7 +1,7 @@
 <div class="global-error">
   <div class="d-flex align-items-center gap-2">
     <img src="assets/icons/error.svg" alt="error-icon" />
-    <p class="m-0">{{ error().message || ('GeneralErrorMsg' | translate) }}</p>
+    <p class="m-0">{{ error().message }}</p>
   </div>
   <div class="footer mt-4 d-flex justify-content-end">
     <button class="btn-cancel" (click)="close()">Ok</button>

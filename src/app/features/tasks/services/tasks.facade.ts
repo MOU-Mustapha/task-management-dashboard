@@ -64,19 +64,14 @@ export class TasksFacade {
   delete(taskId: string): Observable<void> {
     return this.tasksApi.deleteTask(taskId).pipe(tap(() => this.tasksApi.reloadTasks()));
   }
-  getTaskById(taskId: string): Observable<Task> {
-    return this.tasksApi.getTaskById(taskId);
-  }
-  updateTaskStatus(taskId: string, newStatus: TaskStatus): Observable<Task> | void {
-    const task = this.tasks().find((t) => t.id === taskId);
-    if (!task) return;
+  updateTaskStatus(task: Task, newStatus: TaskStatus): Observable<Task> {
     const updatedTask = {
       ...task,
       status: newStatus,
       UpdatedAt: new Date().toISOString(),
       completedAt: newStatus === 'done' ? new Date().toISOString() : '',
     };
-    return this.update(updatedTask);
+    return this.tasksApi.updateTask(updatedTask);
   }
   // Get All Assignees From Tasks
   readonly assignees = computed<Assignee[]>(() => {

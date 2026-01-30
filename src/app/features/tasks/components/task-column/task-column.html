@@ -3,7 +3,14 @@
     <h3 class="title">{{ title | translate }}</h3>
     <span class="count">{{ tasksCount }}</span>
   </div>
-  <div class="tasks-container">
+  <div
+    class="tasks-container"
+    cdkDropList
+    [cdkDropListData]="tasks"
+    [id]="columnId"
+    [cdkDropListConnectedTo]="connectedIds"
+    (cdkDropListDropped)="dragTask($event)"
+  >
     @if (tasksCount > 0) {
       @for (task of tasks; track task.id) {
         <app-task-card [task]="task" />

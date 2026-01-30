@@ -20,7 +20,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((err) => {
       appFacade.loadingService.reset();
       appFacade.errorService.show({
-        message: err.error,
+        message: err?.error,
         status: err.status,
       });
       return throwError(() => err);

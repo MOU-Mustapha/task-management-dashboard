@@ -24,9 +24,6 @@ export class TasksApiService {
   deleteTask(taskId: string): Observable<void> {
     return this.httpClientService.delete<void>(`/tasks/${taskId}`);
   }
-  getTaskById(taskId: string): Observable<Task> {
-    return this.httpClientService.get<Task>(`/tasks/${taskId}`);
-  }
   reloadTasks(): void {
     this.tasksResource.reload();
   }
