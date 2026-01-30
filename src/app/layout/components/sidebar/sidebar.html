@@ -10,5 +10,5 @@
       <span>{{ module.name | translate }}</span>
     </a>
   }
-  <button class="btn-create">+ {{ 'CreateNewTask' | translate }}</button>
+  <button class="btn-create" (click)="openTaskModal()">+ {{ 'CreateNewTask' | translate }}</button>
 </div>

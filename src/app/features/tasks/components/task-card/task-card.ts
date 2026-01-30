@@ -2,16 +2,20 @@ import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core
 import { Task, TaskStatus } from '../../models/task.model';
 import { TasksFacade } from '../../services/tasks.facade';
 import { CommonModule } from '@angular/common';
+import { TaskDialogService } from '../../services/task-dialog.service';
+import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/confirm-dialog';
 
 @Component({
   selector: 'app-task-card',
-  imports: [CommonModule],
+  imports: [CommonModule, ConfirmDialog],
   templateUrl: './task-card.html',
   styleUrl: './task-card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskCard {
   private readonly tasksFacade = inject(TasksFacade);
+  private readonly taskDialogService = inject(TaskDialogService);
+  showDeleteDialog: boolean = false;
   @Input({ required: true }) task!: Task;
   get priorityClass(): string {
     return `priority-${this.task.priority}`;
@@ -45,12 +49,16 @@ export class TaskCard {
   }
 
   onEdit(): void {
-    // this.edit.emit(this.task);
+    this.taskDialogService.open(this.task);
   }
   onDelete(): void {
-    // if (confirm(`Delete Task "${this.task.title}"?`)) {
-    //   this.delete.emit(this.task.id);
-    // }
+    this.showDeleteDialog = true;
+  }
+  onConfirmDelete() {
+    this.tasksFacade.delete(this.task.id).subscribe();
+  }
+  onDismissDelete() {
+    this.showDeleteDialog = false;
   }
   changeStatusTo(newStatus: TaskStatus): void {
     if (newStatus !== this.task.status) {

@@ -4,6 +4,7 @@ import { TaskPriority, TaskStatus } from '../../models/task.model';
 import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { TaskDialogService } from '../../services/task-dialog.service';
 
 @Component({
   selector: 'app-task-filter',
@@ -14,8 +15,10 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class TaskFilter {
   private readonly tasksFacade = inject(TasksFacade);
+  private readonly taskDialogService = inject(TaskDialogService);
   selectedStatus: TaskStatus | 'all' = 'all';
   selectedPriority: TaskPriority | 'all' = 'all';
+  selectedAssignee: string | 'all' = 'all';
   readonly statusTabs: Array<{ id: TaskStatus | 'all'; label: string }> = [
     { id: 'all', label: 'All' },
     { id: 'todo', label: 'ToDo' },
@@ -35,6 +38,10 @@ export class TaskFilter {
     this.selectedStatus = status;
     this.tasksFacade.setStatusFilter(status);
   }
+  onAssigneeClick(assignee: string | 'all') {
+    this.selectedAssignee = assignee;
+    this.tasksFacade.setAssigneeFilter(assignee);
+  }
   onPriorityChange(priority: TaskPriority | 'all') {
     this.selectedPriority = priority;
     this.tasksFacade.setPriorityFilter(priority);
@@ -42,9 +49,10 @@ export class TaskFilter {
   clearFilters() {
     this.selectedStatus = 'all';
     this.selectedPriority = 'all';
+    this.selectedAssignee = 'all';
     this.tasksFacade.clearFilters();
   }
-  onNewTaskClick() {
-    // open the task modal
+  openTaskModal() {
+    this.taskDialogService.open();
   }
 }

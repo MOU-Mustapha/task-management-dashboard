@@ -1,0 +1,15 @@
+<p-dialog
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '25rem' }"
+  draggable="false"
+  header="Confirmation"
+>
+  <div>
+    <p>{{ message | translate }}</p>
+  </div>
+  <div class="mt-4 d-flex align-items-center gap-2 justify-content-end">
+    <button class="btn-save" (click)="confirmDialog()">{{ 'Confirm' | translate }}</button>
+    <button class="btn-cancel" (click)="hideDialog()">{{ 'Cancel' | translate }}</button>
+  </div>
+</p-dialog>

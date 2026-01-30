@@ -1,17 +1,9 @@
-<p-dialog
-  modal
-  header="Error"
-  [style]="{ width: '25rem' }"
-  [visible]="appFacade.errorService.active()"
-  [closable]="false"
-  [draggable]="false"
->
+<div class="global-error">
   <div class="d-flex align-items-center gap-2">
     <img src="assets/icons/error.svg" alt="error-icon" />
-    <p class="m-0">{{ appFacade.errorService.error()?.message }}</p>
+    <p class="m-0">{{ error().message || ('GeneralErrorMsg' | translate) }}</p>
   </div>
-
-  <ng-template pTemplate="footer">
+  <div class="footer mt-4 d-flex justify-content-end">
     <button class="btn-cancel" (click)="close()">Ok</button>
-  </ng-template>
-</p-dialog>
+  </div>
+</div>

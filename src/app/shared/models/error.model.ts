@@ -1,4 +1,4 @@
-export interface GlobalError {
+export interface GlobalErrorObject {
   message: string;
   status?: number;
 }

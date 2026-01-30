@@ -1,1 +1,179 @@
-<p>task-modal works!</p>
+<form class="task-form" [formGroup]="taskForm">
+  <div class="row row-gap-4">
+    <div class="col-md-6">
+      <div class="input-style">
+        <label for="title" class="required">{{ 'Title' | translate }}</label>
+        <input
+          autocomplete="off"
+          name="title"
+          id="title"
+          [placeholder]="'Title' | translate"
+          formControlName="title"
+          tabindex="-1"
+        />
+        <app-field-error
+          [displayError]="validationService.isFieldValid('title')"
+          [errorMsg]="'Validations.MSG_01'"
+        ></app-field-error>
+        <app-field-error
+          [displayError]="validationService.isFieldValid('title')"
+          [errorMsg]="'Validations.MSG_02'"
+        ></app-field-error>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-style">
+        <label for="desc" class="required">{{ 'Description' | translate }}</label>
+        <input
+          autocomplete="off"
+          name="desc"
+          id="desc"
+          [placeholder]="'Description' | translate"
+          formControlName="description"
+          tabindex="-1"
+        />
+        <app-field-error
+          [displayError]="validationService.isFieldValid('description')"
+          [errorMsg]="'Validations.MSG_01'"
+        ></app-field-error>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-style">
+        <label for="status" class="required">{{ 'Status' | translate }}</label>
+        <input
+          autocomplete="off"
+          name="status"
+          id="status"
+          [placeholder]="'Status' | translate"
+          formControlName="status"
+          tabindex="-1"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="dropdown">
+        <label htmlFor="priority" class="required">{{ 'Priority' | translate }}</label>
+        <p-select
+          [options]="priorityOptions"
+          optionValue="value"
+          [placeholder]="'Priority' | translate"
+          formControlName="priority"
+          inputId="priority"
+          appendTo="body"
+          tabindex="-1"
+        >
+          <ng-template pTemplate="item" let-option>
+            {{ option.label | translate }}
+          </ng-template>
+          <ng-template pTemplate="selectedItem" let-option>
+            {{ option.label | translate }}
+          </ng-template>
+        </p-select>
+        <app-field-error
+          [displayError]="validationService.isFieldValid('priority')"
+          [errorMsg]="'Validations.MSG_01'"
+        ></app-field-error>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="dropdown">
+        <label htmlFor="due-date" class="required">{{ 'DueDate' | translate }}</label>
+        <div class="calender">
+          <p-datepicker
+            formControlName="dueDate"
+            [iconDisplay]="'input'"
+            [showIcon]="true"
+            id="due-date"
+            inputId="due-date"
+            [placeholder]="'DueDate' | translate"
+            appendTo="body"
+            tabindex="-1"
+            dateFormat="dd-mm-yy"
+            dataType="date"
+          />
+          <app-field-error
+            [displayError]="validationService.isFieldValid('dueDate')"
+            [errorMsg]="'Validations.MSG_01'"
+          ></app-field-error>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="dropdown">
+        <label htmlFor="assignee" class="required">{{ 'Assignee' | translate }}</label>
+        <p-select
+          [options]="assignees"
+          [placeholder]="'Assignee' | translate"
+          formControlName="assignee"
+          id="assignee"
+          inputId="assignee"
+          appendTo="body"
+          tabindex="-1"
+        >
+          <ng-template pTemplate="item" let-option>
+            {{ option.name | translate }}
+          </ng-template>
+          <ng-template pTemplate="selectedItem" let-option>
+            {{ option.name | translate }}
+          </ng-template>
+        </p-select>
+        <app-field-error
+          [displayError]="validationService.isFieldValid('assignee')"
+          [errorMsg]="'Validations.MSG_01'"
+        ></app-field-error>
+      </div>
+    </div>
+    <div class="col-12">
+      <label for="tags" class="required">{{ 'Tags' | translate }}</label>
+      <div class="add-tag-input">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="input-style">
+              <input
+                #tagInput
+                autocomplete="off"
+                name="tags"
+                id="tags"
+                [placeholder]="'Tag' | translate"
+                tabindex="-1"
+                (input)="onTagInputChange($event.target.value)"
+              />
+              <app-field-error
+                [displayError]="showTagInputValidationMsg"
+                [errorMsg]="'Validations.MSG_01'"
+              ></app-field-error>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <button
+              type="button"
+              class="btn-create"
+              (click)="addTag(tagInput.value); tagInput.value = ''"
+            >
+              + {{ 'AddTag' | translate }}
+            </button>
+          </div>
+        </div>
+        <app-field-error
+          [displayError]="validationService.isFieldValid('tags')"
+          [errorMsg]="'Validations.MSG_03'"
+        ></app-field-error>
+      </div>
+      <div formArrayName="tags" class="tags mt-4 px-2 d-flex align-items-center gap-4">
+        @for (tagControl of tags.controls; track $index; let i = $index) {
+          <div class="tag-item d-flex align-items-center gap-3" [formGroupName]="i">
+            <span>{{ tagControl.value }}</span>
+            <button type="button" (click)="removeTag(i)">✖</button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="actions d-flex align-items-center gap-2 mt-4 justify-content-end">
+    <button type="button" class="btn-cancel" (click)="closeModal()">
+      {{ 'Cancel' | translate }}
+    </button>
+    <button type="button" class="btn-save" (click)="submit()">{{ 'Save' | translate }}</button>
+  </div>
+</form>

@@ -1,6 +1,6 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { TasksApiService } from './tasks.api.service';
-import { Task, TaskPriority, TaskStatus } from '../models/task.model';
+import { Assignee, Task, TaskPriority, TaskStatus } from '../models/task.model';
 import { Observable, tap } from 'rxjs';
 
 @Injectable({
@@ -11,6 +11,7 @@ export class TasksFacade {
   // UI State Signals
   private statusFilter = signal<TaskStatus | 'all'>('all');
   private priorityFilter = signal<TaskPriority | 'all'>('all');
+  private assigneeFilter = signal<string | 'all'>('all');
   private searchTerm = signal<string>('');
   // Data Source
   readonly tasks = computed(() => this.tasksApi.tasksResource.value() ?? []);
@@ -20,10 +21,12 @@ export class TasksFacade {
       const matchesStatus = this.statusFilter() === 'all' || t.status === this.statusFilter();
       const matchesPriority =
         this.priorityFilter() === 'all' || t.priority === this.priorityFilter();
+      const matchesAssignee =
+        this.assigneeFilter() === 'all' || t.assignee.id === this.assigneeFilter();
       const matchesSearchTerm =
         t.title.toLowerCase().includes(this.searchTerm().toLowerCase()) ||
         t.description.toLowerCase().includes(this.searchTerm().toLowerCase());
-      return matchesStatus && matchesPriority && matchesSearchTerm;
+      return matchesStatus && matchesPriority && matchesAssignee && matchesSearchTerm;
     });
   });
   // Group Tasks by Status
@@ -32,39 +35,6 @@ export class TasksFacade {
     this.filteredTasks().filter((t) => t.status === 'in_progress'),
   );
   readonly done = computed(() => this.filteredTasks().filter((t) => t.status === 'done'));
-  // Task Statistics
-  // readonly statistics = computed(() => {
-  //   const allTasks = this.tasks();
-  //   const total = allTasks.length;
-  //   const completed = allTasks.filter((t) => t.status === 'done').length;
-  //   const inProgress = allTasks.filter((t) => t.status === 'in_progress').length;
-  //   const overdue = allTasks.filter((t) => this.isTaskOverdue(t)).length;
-  //   return {
-  //     total,
-  //     completed,
-  //     inProgress,
-  //     overdue,
-  //     completionRate: total > 0 ? Math.round((completed / total) * 100) : 0,
-  //   };
-  // });
-  // Task distribution by priority
-  // readonly priorityDistribution = computed(() => {
-  //   const tasks = this.tasks();
-  //   return {
-  //     high: tasks.filter((t) => t.priority === 'high').length,
-  //     medium: tasks.filter((t) => t.priority === 'medium').length,
-  //     low: tasks.filter((t) => t.priority === 'low').length,
-  //   };
-  // });
-  // Task distribution by status
-  // readonly statusDistribution = computed(() => {
-  //   const tasks = this.tasks();
-  //   return {
-  //     todo: tasks.filter((t) => t.status === 'todo').length,
-  //     inProgress: tasks.filter((t) => t.status === 'in_progress').length,
-  //     done: tasks.filter((t) => t.status === 'done').length,
-  //   };
-  // });
   // Filter Commands
   setStatusFilter(status: TaskStatus | 'all'): void {
     this.statusFilter.set(status);
@@ -72,12 +42,16 @@ export class TasksFacade {
   setPriorityFilter(priority: TaskPriority | 'all'): void {
     this.priorityFilter.set(priority);
   }
+  setAssigneeFilter(assignee: string | 'all'): void {
+    this.assigneeFilter.set(assignee);
+  }
   setSearch(term: string) {
     this.searchTerm.set(term);
   }
   clearFilters(): void {
     this.statusFilter.set('all');
     this.priorityFilter.set('all');
+    this.assigneeFilter.set('all');
     this.searchTerm.set('');
   }
   // CRUD Operations With json-server
@@ -100,11 +74,12 @@ export class TasksFacade {
       ...task,
       status: newStatus,
       UpdatedAt: new Date().toISOString(),
+      completedAt: newStatus === 'done' ? new Date().toISOString() : '',
     };
     return this.update(updatedTask);
   }
   // Get All Assignees From Tasks
-  readonly assignees = computed(() => {
+  readonly assignees = computed<Assignee[]>(() => {
     const assigneeSet = new Set<string>();
     return this.tasks()
       .map((t) => t.assignee)

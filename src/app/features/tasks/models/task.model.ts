@@ -1,3 +1,5 @@
+import { FormArray, FormControl } from '@angular/forms';
+
 export interface Assignee {
   id: string;
   name: string;
@@ -23,4 +25,12 @@ export interface Task {
   updatedAt: string;
 }
 
-export type CreateTaskPayload = Omit<Task, 'id' | 'createdAt' | 'updatedAt'>;
+export interface TaskFormControls {
+  title: FormControl<string | null>;
+  description: FormControl<string | null>;
+  status: FormControl<TaskStatus | null>;
+  priority: FormControl<TaskPriority | null>;
+  dueDate: FormControl<Date | null>;
+  assignee: FormControl<Assignee | null>;
+  tags: FormArray<FormControl<string | null>>;
+}

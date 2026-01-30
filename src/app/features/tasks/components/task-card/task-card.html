@@ -8,7 +8,6 @@
   <div class="card-top">
     <div class="priority" [ngClass]="priorityClass">{{ task.priority | uppercase }}</div>
     <div class="drag">
-      <!-- <button class="menu-btn" (click)="onEdit()" title="Edit">...</button> -->
       <img src="assets/icons/actions.png" alt="actions" />
     </div>
   </div>
@@ -32,10 +31,25 @@
       </div>
     }
   </div>
-  <div class="card-footer">
+  <div class="card-footer d-flex align-items-center justify-content-between">
     <div class="assignee">
       <div class="avatar">{{ task.assignee.avatar }}</div>
       <div class="assignee-name">@{{ formattedAssignee }}</div>
     </div>
+    <div class="actions d-flex align-items-center gap-2">
+      <button (click)="onEdit()">
+        <img src="assets/icons/edit.svg" alt="Edit" />
+      </button>
+      <button (click)="onDelete()">
+        <img src="assets/icons/delete.svg" alt="Delete" />
+      </button>
+    </div>
   </div>
 </div>
+
+<app-confirm-dialog
+  [message]="'DeleteTaskMsg'"
+  [visible]="showDeleteDialog"
+  (confirm)="onConfirmDelete()"
+  (dismiss)="onDismissDelete()"
+/>

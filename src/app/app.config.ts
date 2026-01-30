@@ -8,6 +8,7 @@ import Aura from '@primeuix/themes/aura';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
+import { DialogService } from 'primeng/dynamicdialog';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,5 +30,6 @@ export const appConfig: ApplicationConfig = {
       }),
       fallbackLang: 'en',
     }),
+    DialogService,
   ],
 };

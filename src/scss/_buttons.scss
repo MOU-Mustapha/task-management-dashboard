@@ -1,7 +1,8 @@
 @use 'variables.scss' as *;
 
 .btn-create,
-.btn-cancel {
+.btn-cancel,
+.btn-save {
   padding: 6px 22px;
   font-weight: 500;
   &:focus {
@@ -40,5 +41,16 @@
     background-color: $error-btn-hover-color;
     border-color: $error-btn-hover-color;
     color: #fff;
+  }
+}
+
+.btn-save {
+  width: 6rem;
+  background-color: $save-btn-color;
+  border: 1px solid $save-btn-color;
+  color: #fff;
+  &:hover {
+    background-color: $save-btn-hover-color;
+    border-color: $save-btn-hover-color;
   }
 }

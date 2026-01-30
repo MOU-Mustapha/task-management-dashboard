@@ -32,8 +32,34 @@
         </ng-template>
       </p-select>
     </div>
-    <button class="btn-create" (click)="onNewTaskClick()">
+    <button class="btn-create" (click)="openTaskModal()">
       + {{ 'CreateNewTask' | translate }}
     </button>
+  </div>
+</div>
+
+<div class="task-filter d-flex align-items-center justify-content-between">
+  <div class="left d-flex align-items-center gap-3">
+    <h6 class="m-0">Team Members:</h6>
+    <nav class="tabs d-flex gap-2">
+      <button
+        class="tab-btn"
+        (click)="onAssigneeClick('all')"
+        [class.active]="selectedAssignee === 'all'"
+        [aria-pressed]="selectedAssignee === 'all'"
+      >
+        {{ 'All' | translate }}
+      </button>
+      @for (assignee of assignees; track assignee.id) {
+        <button
+          class="tab-btn"
+          (click)="onAssigneeClick(assignee.id)"
+          [class.active]="selectedAssignee === assignee.id"
+          [aria-pressed]="selectedAssignee === assignee.id"
+        >
+          {{ assignee.name | translate }}
+        </button>
+      }
+    </nav>
   </div>
 </div>

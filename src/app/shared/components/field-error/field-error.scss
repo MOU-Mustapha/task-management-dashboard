@@ -1,0 +1,11 @@
+.error-msg {
+  margin-top: 5px;
+  color: #eb3e3e;
+  font-size: 13px;
+  margin-left: 5px;
+}
+
+::ng-deep .ar .error-msg {
+  margin-left: 0;
+  margin-right: 5px;
+}

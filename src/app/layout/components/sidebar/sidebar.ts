@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
+import { TaskDialogService } from '../../../features/tasks/services/task-dialog.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,4 +17,9 @@ export class Sidebar {
     { name: 'Dashboard', route: '/', icon: 'assets/icons/dashboard.png' },
     { name: 'Tasks', route: '/tasks', icon: 'assets/icons/tasks.png' },
   ];
+  private readonly taskDialogService = inject(TaskDialogService);
+
+  openTaskModal() {
+    this.taskDialogService.open();
+  }
 }
