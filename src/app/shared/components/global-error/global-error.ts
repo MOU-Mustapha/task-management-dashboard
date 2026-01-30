@@ -12,8 +12,6 @@ import { AppFacadeService } from '../../../core/services/app.facade.service';
 })
 export class GlobalError {
   public readonly appFacade = inject(AppFacadeService);
-  readonly active = this.appFacade.errorService.active();
-  readonly errorMessage = this.appFacade.errorService.error()?.message;
   close() {
     this.appFacade.errorService.clear();
   }

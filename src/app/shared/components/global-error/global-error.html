@@ -1,14 +1,14 @@
 <p-dialog
+  modal
   header="Error"
   [style]="{ width: '25rem' }"
-  [visible]="active"
-  modal
+  [visible]="appFacade.errorService.active()"
   [closable]="false"
   [draggable]="false"
 >
   <div class="d-flex align-items-center gap-2">
     <img src="assets/icons/error.svg" alt="error-icon" />
-    <p class="m-0">{{ errorMessage }}</p>
+    <p class="m-0">{{ appFacade.errorService.error()?.message }}</p>
   </div>
 
   <ng-template pTemplate="footer">

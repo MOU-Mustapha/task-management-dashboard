@@ -1,0 +1,14 @@
+<div class="stat-card">
+  <div class="header d-flex align-items-center gap-1">
+    <span class="icon pb-1">{{ statistic.icon }}</span>
+    <span class="title">{{ statistic.title }}</span>
+  </div>
+  <div class="body">
+    <span>{{ statistic.value }}</span>
+  </div>
+  <div class="footer">
+    <span [ngStyle]="{ color: statistic.color }"
+      >{{ formattedChange }} {{ statistic.changeLabel }}</span
+    >
+  </div>
+</div>
