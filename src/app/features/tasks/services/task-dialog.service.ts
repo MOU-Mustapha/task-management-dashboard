@@ -22,6 +22,7 @@ export class TaskDialogService {
       data: { task: task ?? null },
       closable: false,
       modal: true,
+      focusOnShow: false,
       breakpoints: {
         '1024px': '70%',
         '768px': '90%',

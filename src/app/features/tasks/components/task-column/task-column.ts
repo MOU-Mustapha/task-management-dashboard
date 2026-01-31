@@ -28,10 +28,8 @@ export class TaskColumn {
   }
   dragTask(ev: CdkDragDrop<Task[]>) {
     if (ev.previousContainer === ev.container) {
-      console.log('Same Container');
       moveItemInArray(this.tasks, ev.previousIndex, ev.currentIndex);
     } else {
-      console.log('Not Same Container');
       const task = ev.previousContainer.data[ev.previousIndex];
       this.taskDropped.emit({
         previousStatus: ev.previousContainer.id.replace('column-', ''),

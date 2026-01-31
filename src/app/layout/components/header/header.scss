@@ -1,3 +1,5 @@
+@use '../../../../scss/variables' as *;
+
 header {
   height: 64px;
   padding: 0 24px;
@@ -15,7 +17,9 @@ header {
       -ms-border-radius: 8px;
       -o-border-radius: 8px;
       width: 32px;
+      min-width: 32px;
       height: 32px;
+      min-height: 32px;
     }
     span {
       color: var(--color-azure-46, #1976d2);
@@ -43,6 +47,10 @@ header {
       }
       width: 100%;
       caret-color: #1976d2;
+      @media (max-width: $max-sm) {
+        width: 80%;
+        padding: 6px 10px;
+      }
     }
     img {
       position: absolute;
@@ -53,6 +61,9 @@ header {
       -moz-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
       -o-transform: translateY(-50%);
+    }
+    @media (max-width: $max-sm) {
+      text-align: center;
     }
   }
   .right {
@@ -66,11 +77,26 @@ header {
       -o-border-radius: 50%;
     }
     .name {
-      display: block;
-      background: var(--color-azure-46, #1976d2);
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
+      outline: none;
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+      &:hover {
+        background-color: transparent;
+      }
+      position: relative;
+      z-index: 99;
+      span {
+        display: block;
+        background: var(--color-azure-46, #1976d2);
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+      }
     }
     .bill {
       transition: 0.3s;
@@ -109,6 +135,9 @@ header {
       -ms-border-radius: 4px;
       -o-border-radius: 4px;
     }
+  }
+  @media (max-width: $max-sm) {
+    padding: 0 5px;
   }
 }
 

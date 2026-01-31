@@ -1,3 +1,5 @@
+@use '../../../../../scss/variables' as *;
+
 .column {
   background-color: #fff;
   border-radius: 8px;
@@ -55,6 +57,11 @@
         font-size: 14px;
         color: #999;
       }
+    }
+    @media (max-width: $max-lg) {
+      padding: 15px 10px;
+      max-height: 536px;
+      overflow-y: auto;
     }
   }
 }

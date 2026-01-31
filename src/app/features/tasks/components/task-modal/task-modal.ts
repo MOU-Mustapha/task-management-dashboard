@@ -67,10 +67,6 @@ export class TaskModal implements OnInit {
   get tags() {
     return this.taskForm.controls.tags;
   }
-  onTagInputChange(value: string) {
-    if (!value || value.trim() === '') this.showTagInputValidationMsg = true;
-    else this.showTagInputValidationMsg = false;
-  }
   addTag(tag: string) {
     if (!tag || tag.trim() === '') {
       this.showTagInputValidationMsg = true;

@@ -25,6 +25,7 @@
     }
     .tabs {
       .tab-btn {
+        min-width: fit-content;
         font-size: 14px;
         background-color: transparent;
         border: none;
@@ -49,6 +50,13 @@
           background: #1976d2;
           color: #fff;
         }
+        @media (max-width: $max-sm) {
+          padding: 5px 8px;
+        }
+      }
+      @media (max-width: $max-sm) {
+        width: 100%;
+        justify-content: center;
       }
     }
   }
@@ -61,6 +69,13 @@
       width: fit-content;
       padding: 7.2px 22px;
       margin-top: 3px;
+    }
+  }
+  @media (max-width: $max-sm) {
+    .left,
+    .right {
+      width: 100%;
+      justify-content: center;
     }
   }
 }

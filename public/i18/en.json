@@ -32,6 +32,7 @@
   "CreateTask": "Create Task",
   "EditTask": "Edit Task",
   "DeleteTaskMsg": "Are you sure you want to delete this task?",
+  "TeamMembers": "Team Members:",
   "Validations": {
     "MSG_01": "This field is required.",
     "MSG_02": "This field must be at least 3 characters long.",

@@ -17,13 +17,15 @@ export class ErrorService {
     }
     const ref = this.dialogService.open(GlobalError, {
       header: 'Error',
-      width: '25%',
+      width: '30%',
       height: 'fit-content',
       draggable: false,
       data: { error },
       closable: true,
       modal: true,
       breakpoints: {
+        '1300px': '40%',
+        '1024px': '70%',
         '768px': '90%',
         '560px': '95%',
       },

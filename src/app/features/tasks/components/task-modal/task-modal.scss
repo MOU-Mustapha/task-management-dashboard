@@ -24,6 +24,7 @@
           outline: none;
           box-shadow: none;
         }
+        padding: 0;
       }
       background-color: #eee;
       color: $create-btn-color;
@@ -36,6 +37,12 @@
       -moz-border-radius: 8px;
       -ms-border-radius: 8px;
       -o-border-radius: 8px;
+    }
+  }
+  .action-container {
+    @media (max-width: $max-sm) {
+      display: flex;
+      justify-content: center;
     }
   }
 }

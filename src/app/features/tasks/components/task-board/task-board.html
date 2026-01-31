@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row row-gap-4">
   @for (column of columns; track $index) {
-    <div class="col-md-4">
+    <div class="col-xl-4 col-lg-6 col-12">
       <app-task-column
         [title]="column.title"
         [tasks]="getTasksByStatus(column.status)"

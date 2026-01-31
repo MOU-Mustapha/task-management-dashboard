@@ -120,8 +120,8 @@
     </div>
     <div class="col-12">
       <label for="tags" class="required">{{ 'Tags' | translate }}</label>
-      <div class="add-tag-input">
-        <div class="row">
+      <div>
+        <div class="row row-gap-3">
           <div class="col-md-6">
             <div class="input-style">
               <input
@@ -130,7 +130,7 @@
                 name="tags"
                 id="tags"
                 [placeholder]="'Tag' | translate"
-                (input)="onTagInputChange($event.target.value)"
+                (input)="showTagInputValidationMsg = false"
               />
               <app-field-error
                 [displayError]="showTagInputValidationMsg"
@@ -138,7 +138,7 @@
               ></app-field-error>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 action-container">
             <button
               type="button"
               class="btn-create"

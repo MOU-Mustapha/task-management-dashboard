@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TasksFacade } from '../../../features/tasks/services/tasks.facade';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { PopoverModule } from 'primeng/popover';
 
 @Component({
   selector: 'app-header',
-  imports: [TranslateModule, FormsModule],
+  imports: [TranslateModule, FormsModule, PopoverModule, RouterModule],
   templateUrl: './header.html',
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

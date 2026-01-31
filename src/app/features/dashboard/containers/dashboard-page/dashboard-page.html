@@ -1,25 +1,25 @@
 <div class="dashboard-page">
   <app-statistics [statistics]="dashboardFacade.statistics()" />
   <hr class="mt-4" />
-  <div class="row mt-4">
-    <div class="col-md-4">
+  <div class="row mt-4 row-gap-5">
+    <div class="col-sm-4 col-12">
       @if (dashboardFacade.totalTasks() > 0) {
         <app-task-status-chart [chartData]="dashboardFacade.taskStatusChartData()" />
       }
     </div>
-    <div class="col-md-7 offset-md-1">
+    <div class="col-md-7 col-sm-8 offset-md-1 col-12">
       @if (dashboardFacade.totalTasks() > 0) {
         <app-task-completion-chart [chartData]="dashboardFacade.completionChartData()" />
       }
     </div>
   </div>
-  <div class="row mt-5">
-    <div class="col-md-7">
+  <div class="row mt-5 row-gap-5">
+    <div class="col-md-7 col-sm-8 col-12">
       @if (dashboardFacade.totalTasks() > 0) {
         <app-task-weekly-change-chart [chartData]="dashboardFacade.weeklyChanges()" />
       }
     </div>
-    <div class="col-md-4 offset-md-1">
+    <div class="col-sm-4 offset-md-1">
       @if (dashboardFacade.totalTasks() > 0) {
         <app-task-risk-chart [overdueRatio]="dashboardFacade.overdueRatio()" />
       }

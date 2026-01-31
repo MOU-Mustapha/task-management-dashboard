@@ -1,12 +1,12 @@
 <header class="row m-0 align-items-center">
-  <div class="left col-md-4 d-flex gap-2 align-items-center">
+  <div class="left col-md-4 col-1 d-flex gap-2 align-items-center">
     <div class="logo d-flex align-items-center justify-content-center">
       <img src="assets/icons/logo.png" alt="logo" />
     </div>
-    <span>{{ 'LogoTitle' | translate }}</span>
+    <span class="d-none d-md-block">{{ 'LogoTitle' | translate }}</span>
   </div>
-  <div class="center col-md-4">
-    <img width="13px" src="assets/icons/search.svg" alt="Search" />
+  <div class="center col-md-4 col-10">
+    <img class="d-none d-md-block" width="13px" src="assets/icons/search.svg" alt="Search" />
     <input
       id="search"
       type="search"
@@ -14,15 +14,45 @@
       (input)="onSearch($event.target.value)"
     />
   </div>
-  <div class="right col-md-4 d-flex align-items-center justify-content-end">
-    <button (click)="toggleLang()" type="button">
+  <div class="right col-md-4 col-1 d-flex align-items-center justify-content-end">
+    <button (click)="toggleLang()" type="button" class="d-none d-md-flex">
       {{ 'Lang' | translate }}
     </button>
-    <div class="d-flex gap-3">
-      <span class="bill d-flex align-items-center justify-content-center">
+    <div class="d-flex gap-md-3">
+      <span class="bill d-flex align-items-center justify-content-center d-none d-md-flex">
         <img src="assets/icons/bill.png" alt="bill" />
       </span>
-      <span class="d-flex align-items-center justify-content-center name">JD</span>
+      <div class="name d-none d-md-block">
+        <span class="d-flex align-items-center justify-content-center">JD</span>
+      </div>
+      <button class="name d-md-none d-block" (click)="actionMenu.toggle($event)">
+        <span class="d-flex align-items-center justify-content-center">JD</span>
+      </button>
+      <p-popover [styleClass]="'user-menu-panel'" #actionMenu>
+        <div class="actions d-flex flex-column">
+          <div class="action">
+            <a
+              (click)="actionMenu.hide()"
+              [routerLink]="['/']"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <button>{{ 'Dashboard' | translate }}</button>
+            </a>
+          </div>
+          <div class="action">
+            <a (click)="actionMenu.hide()" [routerLink]="['/tasks']" routerLinkActive="active">
+              <button>{{ 'Tasks' | translate }}</button>
+            </a>
+          </div>
+          <hr class="m-0 mt-2" />
+          <div class="action">
+            <button (click)="actionMenu.hide(); toggleLang()" type="button">
+              {{ 'Lang' | translate }}
+            </button>
+          </div>
+        </div>
+      </p-popover>
     </div>
   </div>
 </header>
