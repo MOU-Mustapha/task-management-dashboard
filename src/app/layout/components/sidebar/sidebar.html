@@ -6,9 +6,11 @@
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: i === 0 ? true : false }"
     >
-      <img width="15px" [src]="module.icon" [alt]="module.name" />
+      <img width="15" height="15" [src]="module.icon" [alt]="module.name" />
       <span>{{ module.name | translate }}</span>
     </a>
   }
-  <button class="btn-create" (click)="openTaskModal()">+ {{ 'CreateNewTask' | translate }}</button>
+  <button type="button" class="btn-create" (click)="openTaskModal()">
+    + {{ 'CreateNewTask' | translate }}
+  </button>
 </div>

@@ -9,7 +9,7 @@ import { HttpClientService } from '../../../core/http/http-config/http-client.se
 export class DashboardApiService {
   private readonly httpClientService = inject(HttpClientService);
   readonly statisticsResource = httpResource<Statistic[]>(
-    () => this.httpClientService.fullRequestURL('/statistics'),
+    () => this.httpClientService.fullRequestURL('statistics'),
     {
       defaultValue: [],
     },

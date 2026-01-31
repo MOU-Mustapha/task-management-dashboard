@@ -10,7 +10,7 @@
   <div class="card-top">
     <div class="priority" [ngClass]="priorityClass">{{ task.priority | uppercase }}</div>
     <div class="drag" cdkDragHandle>
-      <img src="assets/icons/actions.png" alt="actions" />
+      <img width="13" height="24" src="assets/icons/actions.png" alt="actions" />
     </div>
   </div>
   <div class="card-body">
@@ -18,10 +18,10 @@
     <p class="desc" [title]="task.description">{{ task.description }}</p>
     <div class="card-meta">
       @if (!isOverdue && task.status !== 'done') {
-        <img src="assets/icons/calendar.png" alt="Calendar" />
+        <img width="10" height="10" src="assets/icons/calendar.png" alt="Calendar" />
       }
       @if (task.status === 'done') {
-        <img src="assets/icons/tasks.png" alt="Calendar" />
+        <img width="12" height="12" src="assets/icons/tasks.png" alt="Calendar" />
       }
       <span>{{ dueRelative }}</span>
     </div>
@@ -39,11 +39,11 @@
       <div class="assignee-name">@{{ formattedAssignee }}</div>
     </div>
     <div class="actions d-flex align-items-center gap-2">
-      <button (click)="onEdit()">
-        <img src="assets/icons/edit.svg" alt="Edit" />
+      <button type="button" (click)="onEdit()">
+        <img width="20" height="20" src="assets/icons/edit.svg" alt="Edit" />
       </button>
-      <button (click)="onDelete()">
-        <img src="assets/icons/delete.svg" alt="Delete" />
+      <button type="button" (click)="onDelete()">
+        <img width="20" height="20" src="assets/icons/delete.svg" alt="Delete" />
       </button>
     </div>
   </div>

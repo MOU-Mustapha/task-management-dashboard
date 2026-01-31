@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class HttpClientService {
   private readonly http: HttpClient = inject(HttpClient);
   fullRequestURL(resource: string | number): string {
-    return environment.apiUrl + resource;
+    return `${environment.apiUrl}/${resource}`;
   }
   get<T>(resource: string | number, params?: { [key: string]: unknown }): Observable<T> {
     if (params) {

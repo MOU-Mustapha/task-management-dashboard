@@ -9,7 +9,11 @@
     <p>{{ message | translate }}</p>
   </div>
   <div class="mt-4 d-flex align-items-center gap-2 justify-content-end">
-    <button class="btn-save" (click)="confirmDialog()">{{ 'Confirm' | translate }}</button>
-    <button class="btn-cancel" (click)="hideDialog()">{{ 'Cancel' | translate }}</button>
+    <button type="button" class="btn-save" (click)="confirmDialog()">
+      {{ 'Confirm' | translate }}
+    </button>
+    <button type="button" class="btn-cancel" (click)="hideDialog()">
+      {{ 'Cancel' | translate }}
+    </button>
   </div>
 </p-dialog>

@@ -1,12 +1,10 @@
-import { HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, retry, throwError, timer } from 'rxjs';
 import { AppFacadeService } from '../services/app.facade.service';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
-  const requests: HttpRequest<unknown>[] = [];
   const appFacade = inject(AppFacadeService);
-  requests.push(req);
   return next(req).pipe(
     retry({
       count: 1,

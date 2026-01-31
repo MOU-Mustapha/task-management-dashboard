@@ -4,7 +4,7 @@ import { computed, Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class LoadingService {
-  private _counter = signal<number>(0);
+  private readonly _counter = signal<number>(0);
   readonly loading = computed(() => this._counter() > 0);
 
   start() {

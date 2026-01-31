@@ -28,7 +28,9 @@ export class TaskCard {
 
   get dueRelative(): string {
     const now = new Date();
+    now.setHours(0, 0, 0, 0);
     const due = new Date(this.task.dueDate);
+    due.setHours(0, 0, 0, 0);
     const diff = Math.floor((due.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
     if (this.task.status === 'done') {
       const completed = new Date(this.task.completedAt);

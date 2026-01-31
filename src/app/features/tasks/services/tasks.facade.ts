@@ -89,6 +89,8 @@ export class TasksFacade {
     if (task.status === 'done') return false;
     const dueDate = new Date(task.dueDate);
     const now = new Date();
+    dueDate.setHours(0, 0, 0, 0);
+    now.setHours(0, 0, 0, 0);
     return dueDate < now && dueDate.toDateString() !== now.toDateString();
   }
 }
