@@ -12,7 +12,7 @@ export class ErrorService {
   private readonly dialogService = inject(DialogService);
   private readonly translateService = inject(TranslateService);
   show(error: GlobalErrorObject): Observable<GlobalErrorObject | undefined> {
-    if (typeof error.message !== typeof String || !error.message) {
+    if (typeof error.message !== 'string' || !error.message) {
       error.message = this.translateService.instant('GeneralErrorMsg');
     }
     const ref = this.dialogService.open(GlobalError, {
