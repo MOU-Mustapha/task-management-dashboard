@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Statistic } from '../../models/statistics.model';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-statistics-card',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './statistics-card.html',
   styleUrl: './statistics-card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

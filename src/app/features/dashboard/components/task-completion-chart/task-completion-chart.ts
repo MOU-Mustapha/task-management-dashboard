@@ -8,10 +8,11 @@ import {
 } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { BarChartData } from '../../models/statistics.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-task-completion-chart',
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './task-completion-chart.html',
   styleUrl: './task-completion-chart.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

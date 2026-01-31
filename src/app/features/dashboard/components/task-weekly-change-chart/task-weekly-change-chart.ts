@@ -8,10 +8,11 @@ import {
 } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { weeklyChangesChartData } from '../../models/statistics.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-task-weekly-change-chart',
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './task-weekly-change-chart.html',
   styleUrl: './task-weekly-change-chart.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

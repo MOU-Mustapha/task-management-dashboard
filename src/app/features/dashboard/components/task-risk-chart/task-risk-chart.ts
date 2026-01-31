@@ -1,9 +1,10 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { Chart } from 'chart.js/auto';
 
 @Component({
   selector: 'app-task-risk-chart',
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './task-risk-chart.html',
   styleUrl: './task-risk-chart.scss',
 })

@@ -8,10 +8,11 @@ import {
 } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { DonutChartData } from '../../models/statistics.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-task-status-chart',
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './task-status-chart.html',
   styleUrl: './task-status-chart.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
