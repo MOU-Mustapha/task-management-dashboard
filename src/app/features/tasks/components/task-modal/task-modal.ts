@@ -11,7 +11,7 @@ import { TasksFacade } from '../../services/tasks.facade';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Task, TaskFormControls, TaskPriority } from '../../models/task.model';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SelectModule } from 'primeng/select';
 import { DatePickerModule } from 'primeng/datepicker';
 import { FieldError } from '../../../../shared/components/field-error/field-error';
@@ -37,13 +37,18 @@ export class TaskModal implements OnInit {
   private readonly dialogConfig = inject(DynamicDialogConfig);
   private readonly fb = inject(FormBuilder);
   public readonly validationService = inject(ValidationService);
+  private readonly translateService = inject(TranslateService);
   showTagInputValidationMsg: boolean = false;
   readonly task = signal<Task | null>(this.dialogConfig.data?.task || null);
   readonly isEdit = computed(() => !!this.task());
   readonly taskForm = this.fb.group<TaskFormControls>({
     title: this.fb.control(null, [Validators.required, Validators.minLength(3)]),
     description: this.fb.control(null, Validators.required),
-    status: this.fb.control({ value: 'todo', disabled: true }, Validators.required),
+    displayedStatus: this.fb.control({
+      value: this.translateService.instant('todo'),
+      disabled: true,
+    }),
+    status: this.fb.control('todo', Validators.required),
     priority: this.fb.control(null, Validators.required),
     dueDate: this.fb.control(null, Validators.required),
     assignee: this.fb.control(null, Validators.required),
@@ -81,6 +86,7 @@ export class TaskModal implements OnInit {
     this.taskForm.patchValue({
       title: task.title,
       description: task.description,
+      displayedStatus: this.translateService.instant(task.status),
       status: task.status,
       priority: task.priority,
       dueDate: new Date(task.dueDate),

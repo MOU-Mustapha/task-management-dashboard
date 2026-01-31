@@ -28,6 +28,7 @@ export interface Task {
 export interface TaskFormControls {
   title: FormControl<string | null>;
   description: FormControl<string | null>;
+  displayedStatus: FormControl<TaskStatus | null>;
   status: FormControl<TaskStatus | null>;
   priority: FormControl<TaskPriority | null>;
   dueDate: FormControl<Date | null>;
