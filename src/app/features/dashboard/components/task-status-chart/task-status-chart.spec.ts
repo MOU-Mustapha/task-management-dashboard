@@ -63,9 +63,12 @@ describe('TaskStatusChart', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should create Chart on first render with correct data and options', () => {
+  it('should create Chart on first render with correct data and options', async () => {
     component.chartData = baseData;
     fixture.detectChanges();
+
+    // Wait for the async import in ngAfterViewInit
+    await component.ngAfterViewInit();
 
     expect(chartMock).toHaveBeenCalledTimes(1);
 
@@ -88,9 +91,12 @@ describe('TaskStatusChart', () => {
     });
   });
 
-  it('should update existing Chart when ngAfterViewInit runs again', () => {
+  it('should update existing Chart when ngAfterViewInit runs again', async () => {
     component.chartData = baseData;
     fixture.detectChanges();
+
+    // Initialize the chart first
+    await component.ngAfterViewInit();
 
     component.chartData = {
       completed: 1,
@@ -98,14 +104,13 @@ describe('TaskStatusChart', () => {
       overdue: 3,
     };
 
-    component.ngAfterViewInit();
+    // Mock the chart instance to avoid DOM issues during update
+    const chartInstance = (component as unknown as { chart: Chart }).chart;
+    chartInstance.update = vi.fn();
+
+    await component.ngAfterViewInit();
 
     expect(chartMock).toHaveBeenCalledTimes(1);
-
-    const chartInstance = chartMock.mock.results[0]?.value as {
-      data: { datasets: Array<{ data: number[] }> };
-      update: () => void;
-    };
 
     expect(chartInstance.data.datasets[0].data).toEqual([1, 2, 3]);
     expect(chartInstance.update).toHaveBeenCalledTimes(1);

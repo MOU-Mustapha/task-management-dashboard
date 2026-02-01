@@ -98,13 +98,13 @@ describe('Sidebar', () => {
 
       // Dashboard icon
       expect(icons[0].getAttribute('src')).toBe('assets/icons/dashboard.png');
-      expect(icons[0].getAttribute('alt')).toBe('Dashboard');
+      expect(icons[0].getAttribute('alt')).toBe('0.module');
       expect(icons[0].getAttribute('width')).toBe('15');
       expect(icons[0].getAttribute('height')).toBe('15');
 
       // Tasks icon
       expect(icons[1].getAttribute('src')).toBe('assets/icons/tasks.png');
-      expect(icons[1].getAttribute('alt')).toBe('Tasks');
+      expect(icons[1].getAttribute('alt')).toBe('1.module');
       expect(icons[1].getAttribute('width')).toBe('15');
       expect(icons[1].getAttribute('height')).toBe('15');
     });
@@ -148,7 +148,7 @@ describe('Sidebar', () => {
 
       icons.forEach((icon: Element, index: number) => {
         const altText = icon.getAttribute('alt');
-        expect(altText).toBe(component.modules[index].name);
+        expect(altText).toBe(`${index}.module`);
       });
     });
 

@@ -4,7 +4,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { describe, it, expect, beforeEach, vi, type Mock } from 'vitest';
 import { of } from 'rxjs';
 
-import { Task, Assignee, TaskStatus } from '../../models/task.model';
+import { Task, Assignee } from '../../models/task.model';
 import { TaskCard } from './task-card';
 import { TasksFacade } from '../../services/tasks.facade';
 import { TaskDialogService } from '../../services/task-dialog.service';
@@ -154,22 +154,6 @@ describe('TaskCard', () => {
       component.showDeleteDialog = true;
       component.onDismissDelete();
       expect(component.showDeleteDialog).toBe(false);
-    });
-  });
-
-  describe('changeStatusTo', () => {
-    it('should not emit if status is the same', () => {
-      const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-      component.changeStatusTo('todo' as TaskStatus);
-      // No assertion needed; just ensure no error
-      consoleSpy.mockRestore();
-    });
-
-    it('should not emit if status is different (method currently no-op)', () => {
-      const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-      component.changeStatusTo('in_progress' as TaskStatus);
-      // No assertion needed; just ensure no error
-      consoleSpy.mockRestore();
     });
   });
 });

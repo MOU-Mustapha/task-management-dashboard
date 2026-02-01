@@ -55,9 +55,12 @@ describe('TaskRiskChart', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should create Chart on first render with correct data and options', () => {
+  it('should create Chart on first render with correct data and options', async () => {
     component.overdueRatio = baseOverdueRatio;
     fixture.detectChanges();
+
+    // Wait for the async import in ngAfterViewInit
+    await component.ngAfterViewInit();
 
     expect(chartMock).toHaveBeenCalledTimes(1);
 
@@ -77,9 +80,12 @@ describe('TaskRiskChart', () => {
     });
   });
 
-  it('should handle zero overdue ratio', () => {
+  it('should handle zero overdue ratio', async () => {
     component.overdueRatio = 0;
     fixture.detectChanges();
+
+    // Wait for the async import in ngAfterViewInit
+    await component.ngAfterViewInit();
 
     expect(chartMock).toHaveBeenCalledTimes(1);
 
@@ -87,9 +93,12 @@ describe('TaskRiskChart', () => {
     expect(config.data.datasets[0].data).toEqual([0, 100]);
   });
 
-  it('should handle 100% overdue ratio', () => {
+  it('should handle 100% overdue ratio', async () => {
     component.overdueRatio = 100;
     fixture.detectChanges();
+
+    // Wait for the async import in ngAfterViewInit
+    await component.ngAfterViewInit();
 
     expect(chartMock).toHaveBeenCalledTimes(1);
 
@@ -97,9 +106,12 @@ describe('TaskRiskChart', () => {
     expect(config.data.datasets[0].data).toEqual([100, 0]);
   });
 
-  it('should handle decimal overdue ratios', () => {
+  it('should handle decimal overdue ratios', async () => {
     component.overdueRatio = 33.33;
     fixture.detectChanges();
+
+    // Wait for the async import in ngAfterViewInit
+    await component.ngAfterViewInit();
 
     expect(chartMock).toHaveBeenCalledTimes(1);
 
@@ -107,9 +119,12 @@ describe('TaskRiskChart', () => {
     expect(config.data.datasets[0].data).toEqual([33.33, 66.67]);
   });
 
-  it('should have correct chart configuration for risk visualization', () => {
+  it('should have correct chart configuration for risk visualization', async () => {
     component.overdueRatio = baseOverdueRatio;
     fixture.detectChanges();
+
+    // Wait for the async import in ngAfterViewInit
+    await component.ngAfterViewInit();
 
     const [, config] = chartMock.mock.calls[0] as [HTMLCanvasElement, ChartConfiguration];
 

@@ -68,9 +68,12 @@ describe('TaskCompletionChart', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should create Chart on first render with correct data and options', () => {
+  it('should create Chart on first render with correct data and options', async () => {
     component.chartData = baseData;
     fixture.detectChanges();
+
+    // Wait for the async import in ngAfterViewInit
+    await component.ngAfterViewInit();
 
     expect(chartMock).toHaveBeenCalledTimes(1);
 
