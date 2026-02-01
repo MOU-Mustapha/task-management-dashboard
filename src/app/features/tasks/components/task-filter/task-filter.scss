@@ -2,53 +2,23 @@
 
 .task-filter {
   padding: 12px 16px;
-  background-color: #fff;
+  background-color: $white-color;
   border-radius: 8px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px;
   box-shadow: 0px 2px 4px 0px #00000014;
   margin-bottom: 30px;
   .left {
     flex: 1;
-    .reset {
-      outline: none;
-      background-color: transparent;
-      border: none;
-      margin: 0;
-      padding: 0;
-      &:focus {
-        outline: none;
-        box-shadow: none;
-      }
-    }
     .tabs {
       .tab-btn {
         min-width: fit-content;
         font-size: 14px;
-        background-color: transparent;
-        border: none;
-        outline: none;
         padding: 5px 16px;
         border-radius: 4px;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        -ms-border-radius: 4px;
-        -o-border-radius: 4px;
-        color: #000;
+        color: $black-color;
         transition: 0.3s;
-        -webkit-transition: 0.3s;
-        -moz-transition: 0.3s;
-        -ms-transition: 0.3s;
-        -o-transition: 0.3s;
-        &:focus {
-          outline: none;
-          box-shadow: none;
-        }
         &.active {
           background: #1976d2;
-          color: #fff;
+          color: $white-color;
         }
         @media (max-width: $max-sm) {
           padding: 5px 8px;

@@ -6,11 +6,6 @@ body {
   scroll-behavior: smooth;
   margin: 0;
   background-color: $grey-color;
-  &:focus,
-  & {
-    outline: none;
-    box-shadow: none;
-  }
   overflow: hidden;
 }
 
@@ -27,16 +22,25 @@ a {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background-color: #fff;
+  background-color: $white-color;
 }
 ::-webkit-scrollbar-thumb {
   background-color: $create-btn-color;
   border-radius: 1rem;
-  -webkit-border-radius: 1rem;
-  -moz-border-radius: 1rem;
-  -ms-border-radius: 1rem;
-  -o-border-radius: 1rem;
   &:hover {
     background-color: $create-btn-hover-color;
   }
+}
+
+button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  cursor: pointer;
 }

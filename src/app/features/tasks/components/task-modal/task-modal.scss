@@ -16,15 +16,7 @@
     max-width: 100%;
     .tag-item {
       button {
-        outline: none;
-        border: none;
-        background-color: transparent;
         color: $error-btn-color;
-        &:focus {
-          outline: none;
-          box-shadow: none;
-        }
-        padding: 0;
       }
       background-color: #eee;
       color: $create-btn-color;
@@ -33,10 +25,6 @@
       width: fit-content;
       padding: 10px;
       border-radius: 8px;
-      -webkit-border-radius: 8px;
-      -moz-border-radius: 8px;
-      -ms-border-radius: 8px;
-      -o-border-radius: 8px;
     }
   }
   .action-container {
@@ -49,22 +37,18 @@
 
 ::ng-deep .p-select-overlay {
   .p-select-option {
-    color: #000;
+    color: $black-color;
     font-size: 14px;
     font-weight: 400;
     height: 2.5rem;
     &:hover {
       background-color: $create-btn-color !important;
-      color: #fff !important;
+      color: $white-color !important;
     }
     transition: 0.3s;
-    -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
-    -ms-transition: 0.3s;
-    -o-transition: 0.3s;
   }
   .p-select-option.p-select-option-selected {
     background-color: #ddd;
-    color: #000;
+    color: $black-color;
   }
 }

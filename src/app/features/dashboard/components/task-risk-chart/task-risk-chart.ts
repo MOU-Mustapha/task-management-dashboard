@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { Chart } from 'chart.js/auto';
 
 /**
  * Task Risk Chart Component
@@ -37,9 +36,11 @@ import { Chart } from 'chart.js/auto';
 export class TaskRiskChart implements AfterViewInit {
   @Input({ required: true }) overdueRatio!: number;
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
-  private chart!: Chart;
-  ngAfterViewInit(): void {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private chart!: any;
+  async ngAfterViewInit(): Promise<void> {
     if (!this.chart) {
+      const { Chart } = await import('chart.js/auto');
       this.chart = new Chart(this.canvas.nativeElement, {
         type: 'doughnut',
         data: {

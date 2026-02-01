@@ -12,6 +12,6 @@
  */
 export const environment = {
   production: true,
-  apiUrl: 'https://10.0.20.99:8080', // for example
+  apiUrl: 'http://localhost:3000',
   appName: 'Task Management Dashboard',
 };

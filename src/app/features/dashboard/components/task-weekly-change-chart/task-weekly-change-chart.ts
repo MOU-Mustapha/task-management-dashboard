@@ -6,7 +6,6 @@ import {
   Input,
   ViewChild,
 } from '@angular/core';
-import { Chart } from 'chart.js/auto';
 import { weeklyChangesChartData } from '../../models/statistics.model';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -38,9 +37,11 @@ import { TranslateModule } from '@ngx-translate/core';
 export class TaskWeeklyChangeChart implements AfterViewInit {
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
   @Input({ required: true }) chartData!: weeklyChangesChartData[];
-  private chart!: Chart;
-  ngAfterViewInit(): void {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private chart!: any;
+  async ngAfterViewInit(): Promise<void> {
     if (!this.chart) {
+      const { Chart } = await import('chart.js/auto');
       this.chart = new Chart(this.canvas.nativeElement, {
         type: 'bar',
         data: {

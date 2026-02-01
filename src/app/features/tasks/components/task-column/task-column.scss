@@ -1,12 +1,8 @@
 @use '../../../../../scss/variables' as *;
 
 .column {
-  background-color: #fff;
+  background-color: $white-color;
   border-radius: 8px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px;
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -26,10 +22,6 @@
     }
     .count {
       border-radius: 12px;
-      -webkit-border-radius: 12px;
-      -moz-border-radius: 12px;
-      -ms-border-radius: 12px;
-      -o-border-radius: 12px;
       background-color: #e0e0e0;
       padding: 1px 10px;
       font-size: 12px;

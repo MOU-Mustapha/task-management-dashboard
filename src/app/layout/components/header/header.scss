@@ -4,7 +4,7 @@ header {
   height: 64px;
   padding: 0 24px;
   box-shadow: 0px 2px 4px 0px #00000014;
-  background-color: #fff;
+  background-color: $white-color;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -12,10 +12,6 @@ header {
     .logo {
       background: var(--color-azure-46, #1976d2);
       border-radius: 8px;
-      -webkit-border-radius: 8px;
-      -moz-border-radius: 8px;
-      -ms-border-radius: 8px;
-      -o-border-radius: 8px;
       width: 32px;
       min-width: 32px;
       height: 32px;
@@ -30,17 +26,13 @@ header {
   .center {
     position: relative;
     input {
-      background: var(--color-white-solid, #ffffff);
+      background: var(--color-white-solid, $white-color);
       border: 1px solid var(--color-grey-88, #e0e0e0);
       padding: 6px 10px 6px 28px;
       border-radius: 4px;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
-      -ms-border-radius: 4px;
-      -o-border-radius: 4px;
       font-size: 13px;
       font-weight: 400;
-      color: #000;
+      color: $black-color;
       &:focus {
         outline: none;
         box-shadow: none;
@@ -57,10 +49,6 @@ header {
       left: 24px;
       top: 50%;
       transform: translateY(-50%);
-      -webkit-transform: translateY(-50%);
-      -moz-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-      -o-transform: translateY(-50%);
     }
     @media (max-width: $max-sm) {
       text-align: center;
@@ -71,20 +59,8 @@ header {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      -ms-border-radius: 50%;
-      -o-border-radius: 50%;
     }
     .name {
-      outline: none;
-      border: none;
-      background-color: transparent;
-      padding: 0;
-      &:focus {
-        outline: none;
-        box-shadow: none;
-      }
       &:hover {
         background-color: transparent;
       }
@@ -93,17 +69,13 @@ header {
       span {
         display: block;
         background: var(--color-azure-46, #1976d2);
-        color: #fff;
+        color: $white-color;
         font-size: 16px;
         font-weight: bold;
       }
     }
     .bill {
       transition: 0.3s;
-      -webkit-transition: 0.3s;
-      -moz-transition: 0.3s;
-      -ms-transition: 0.3s;
-      -o-transition: 0.3s;
       cursor: pointer;
       &:hover {
         background-color: #0000000d;
@@ -113,27 +85,12 @@ header {
       font-size: 15px;
       font-weight: 500;
       padding: 8px 12px;
-      border: none;
-      outline: none;
-      background-color: transparent;
       &:hover {
         background-color: #0000000d;
         color: var(--color-azure-46, #1976d2);
       }
-      &:focus {
-        outline: none;
-        box-shadow: none;
-      }
       transition: 0.3s;
-      -webkit-transition: 0.3s;
-      -moz-transition: 0.3s;
-      -ms-transition: 0.3s;
-      -o-transition: 0.3s;
       border-radius: 4px;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
-      -ms-border-radius: 4px;
-      -o-border-radius: 4px;
     }
   }
   @media (max-width: $max-sm) {
@@ -150,10 +107,6 @@ header {
       left: auto;
       right: 24px;
       transform: rotateY(180deg) translateY(-50%) !important;
-      -webkit-transform: rotateY(180deg) translateY(-50%) !important;
-      -moz-transform: rotateY(180deg) translateY(-50%) !important;
-      -ms-transform: rotateY(180deg) translateY(-50%) !important;
-      -o-transform: rotateY(180deg) translateY(-50%) !important;
     }
   }
 }

@@ -3,8 +3,8 @@
 .user-menu-panel.p-popover.p-component {
   margin-top: 5px;
   min-width: 180px;
-  background-color: #fff;
-  color: #000;
+  background-color: $white-color;
+  color: $black-color;
   box-shadow: 0px 0px 16px 0px #23232c1a;
   &::before {
     display: none !important;
@@ -19,11 +19,11 @@
     .action {
       margin: 2px 0;
       a {
-        color: #000;
+        color: $black-color;
         &.active {
           button {
             background-color: $create-btn-color;
-            color: #fff;
+            color: $white-color;
           }
         }
       }
@@ -47,10 +47,6 @@
         background-color: #eee;
       }
       transition: 0.3s;
-      -webkit-transition: 0.3s;
-      -moz-transition: 0.3s;
-      -ms-transition: 0.3s;
-      -o-transition: 0.3s;
     }
   }
 }

@@ -1,11 +1,9 @@
+@use '../../../../../scss/variables' as *;
+
 .stat-card {
   border-radius: 8px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px;
   padding: 30px 24px;
-  background-color: #fff;
+  background-color: $white-color;
   .header {
     margin-bottom: 20px;
     .title {

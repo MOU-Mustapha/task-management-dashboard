@@ -6,7 +6,6 @@ import {
   Input,
   ViewChild,
 } from '@angular/core';
-import { Chart } from 'chart.js/auto';
 import { BarChartData } from '../../models/statistics.model';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -38,9 +37,11 @@ import { TranslateModule } from '@ngx-translate/core';
 export class TaskCompletionChart implements AfterViewInit {
   @Input({ required: true }) chartData!: BarChartData;
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
-  private chart!: Chart;
-  ngAfterViewInit(): void {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private chart!: any;
+  async ngAfterViewInit(): Promise<void> {
     if (!this.chart) {
+      const { Chart } = await import('chart.js/auto');
       this.chart = new Chart(this.canvas.nativeElement, {
         type: 'bar',
         data: {
