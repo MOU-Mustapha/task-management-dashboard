@@ -102,6 +102,131 @@ src/
    ```
    Navigate to `http://localhost:4200/` in your browser.
 
+## 🐳 Docker Deployment
+
+### Overview
+
+The Task Management Dashboard includes a complete Docker setup for containerized deployment. This setup includes:
+
+- **Frontend Container**: Angular application served by Nginx
+- **Backend Container**: JSON Server for mock API data
+- **Nginx Configuration**: Optimized reverse proxy with caching and compression
+- **Docker Compose**: Orchestration of all services with networking
+
+### Docker Architecture
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Browser       │    │   Nginx         │    │   JSON Server   │
+│   :8090         │────│   :80           │────│   :3000         │
+│                 │    │   (Frontend)    │    │   (Backend)     │
+│                 │    │   + Proxy       │    │                 │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+### Container Services
+
+#### 1. **Frontend Service** (`tasks_frontend`)
+
+- **Base Image**: `nginx:alpine`
+- **Build**: Multi-stage build with Node.js for Angular compilation
+- **Port**: 8090 (mapped to container port 80)
+- **Features**:
+  - Production-optimized Angular build
+  - Nginx reverse proxy configuration
+  - Static asset caching
+  - Gzip compression
+  - SPA routing support
+
+#### 2. **Backend Service** (`tasks_json_server`)
+
+- **Base Image**: `node:24-alpine`
+- **Port**: 3000 (internal)
+- **Features**:
+  - JSON Server for REST API simulation
+  - Automatic data generation and merging
+  - Persistent data volume
+  - Host binding for container communication
+
+### Docker Files Structure
+
+```
+├── Dockerfile                 # Frontend multi-stage build
+├── Dockerfile.json-server     # Backend JSON Server container
+├── docker-compose.yml         # Service orchestration
+├── nginx.conf                 # Nginx configuration
+└── generate-data.js          # Mock data generation
+```
+
+### Quick Start with Docker
+
+#### 1. **Build and Start All Services**
+
+```bash
+# Build and start all containers in detached mode
+docker-compose up -d --build
+```
+
+#### 2. **Access the Application**
+
+- **Frontend**: http://localhost:8090
+- **API**: http://localhost:8090/api/ (proxied to JSON Server)
+
+#### 3. **View Logs**
+
+```bash
+# View all service logs
+docker-compose logs -f
+
+# View specific service logs
+docker-compose logs -f tasks_frontend
+docker-compose logs -f tasks_json_server
+```
+
+#### 4. **Stop Services**
+
+```bash
+# Stop and remove containers
+docker-compose down
+
+# Stop with volume removal (removes all data)
+docker-compose down -v
+```
+
+### Configuration Details
+
+#### Nginx Configuration (`nginx.conf`)
+
+**Performance Optimizations**:
+
+- Gzip compression for text-based assets
+- Static asset caching (1 year for immutable files)
+- Connection keep-alive and TCP optimizations
+
+**Routing Configuration**:
+
+- SPA routing support (`try_files $uri $uri/ /index.html`)
+- API proxy to JSON Server (`/api/` → `http://tasks_json_server:3000/`)
+- CORS and WebSocket support
+
+#### Docker Compose Configuration
+
+**Networking**:
+
+- Custom bridge network (`tasks_network`) for service communication
+- Internal service discovery via container names
+- Port mapping for external access
+
+**Volumes**:
+
+- Persistent data volume for JSON Server data
+
+**Build Context**:
+
+- Multi-stage builds for optimized image sizes
+- Dependency caching for faster rebuilds
+- Production-optimized configurations
+
 ## ⚙️ Environment Configuration
 
 ### Development Environment

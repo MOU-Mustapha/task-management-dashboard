@@ -14,7 +14,7 @@ describe('Statistics', () => {
       imports: [
         Statistics,
         TranslateModule.forRoot({
-          defaultLanguage: 'en',
+          fallbackLang: 'en',
         }),
       ],
     }).compileComponents();

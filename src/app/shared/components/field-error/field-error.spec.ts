@@ -13,7 +13,7 @@ describe('FieldError', () => {
       imports: [
         FieldError,
         TranslateModule.forRoot({
-          defaultLanguage: 'en',
+          fallbackLang: 'en',
         }),
       ],
     }).compileComponents();

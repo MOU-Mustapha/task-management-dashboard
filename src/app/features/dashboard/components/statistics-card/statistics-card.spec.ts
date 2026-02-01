@@ -25,7 +25,7 @@ describe('StatisticsCard', () => {
       imports: [
         StatisticsCard,
         TranslateModule.forRoot({
-          defaultLanguage: 'en',
+          fallbackLang: 'en',
         }),
       ],
     }).compileComponents();

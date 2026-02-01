@@ -42,7 +42,7 @@ describe('Sidebar', () => {
       imports: [
         Sidebar,
         TranslateModule.forRoot({
-          defaultLanguage: 'en',
+          fallbackLang: 'en',
         }),
         ButtonModule,
         RouterModule.forRoot([]),

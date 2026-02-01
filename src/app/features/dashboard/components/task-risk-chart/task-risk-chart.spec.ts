@@ -39,7 +39,7 @@ describe('TaskRiskChart', () => {
       imports: [
         TaskRiskChart,
         TranslateModule.forRoot({
-          defaultLanguage: 'en',
+          fallbackLang: 'en',
         }),
       ],
     }).compileComponents();
@@ -64,7 +64,7 @@ describe('TaskRiskChart', () => {
 
     expect(chartMock).toHaveBeenCalledTimes(1);
 
-    const [canvasEl, config] = chartMock.mock.calls[0] as [HTMLCanvasElement, ChartConfiguration];
+    const [canvasEl, config] = chartMock.mock.calls[0];
     expect(canvasEl).toBe(fixture.debugElement.nativeElement.querySelector('canvas'));
 
     expect(config.type).toBe('doughnut');
@@ -89,7 +89,7 @@ describe('TaskRiskChart', () => {
 
     expect(chartMock).toHaveBeenCalledTimes(1);
 
-    const [, config] = chartMock.mock.calls[0] as [HTMLCanvasElement, ChartConfiguration];
+    const [, config] = chartMock.mock.calls[0];
     expect(config.data.datasets[0].data).toEqual([0, 100]);
   });
 
@@ -102,7 +102,7 @@ describe('TaskRiskChart', () => {
 
     expect(chartMock).toHaveBeenCalledTimes(1);
 
-    const [, config] = chartMock.mock.calls[0] as [HTMLCanvasElement, ChartConfiguration];
+    const [, config] = chartMock.mock.calls[0];
     expect(config.data.datasets[0].data).toEqual([100, 0]);
   });
 
@@ -115,7 +115,7 @@ describe('TaskRiskChart', () => {
 
     expect(chartMock).toHaveBeenCalledTimes(1);
 
-    const [, config] = chartMock.mock.calls[0] as [HTMLCanvasElement, ChartConfiguration];
+    const [, config] = chartMock.mock.calls[0];
     expect(config.data.datasets[0].data).toEqual([33.33, 66.67]);
   });
 
@@ -126,7 +126,7 @@ describe('TaskRiskChart', () => {
     // Wait for the async import in ngAfterViewInit
     await component.ngAfterViewInit();
 
-    const [, config] = chartMock.mock.calls[0] as [HTMLCanvasElement, ChartConfiguration];
+    const [, config] = chartMock.mock.calls[0];
 
     // Verify it's a doughnut chart (appropriate for risk visualization)
     expect(config.type).toBe('doughnut');
@@ -136,5 +136,26 @@ describe('TaskRiskChart', () => {
 
     // Verify legend is disabled (cleaner look for doughnut chart)
     expect(config.options?.plugins?.legend?.display).toBe(false);
+  });
+
+  it('should update existing Chart when ngAfterViewInit runs again', async () => {
+    component.overdueRatio = baseOverdueRatio;
+    fixture.detectChanges();
+
+    // Initialize the chart first
+    await component.ngAfterViewInit();
+
+    // Change the data
+    component.overdueRatio = 50;
+
+    // Mock the chart instance to avoid DOM issues during update
+    const chartInstance = (component as unknown as { chart: Chart }).chart;
+    chartInstance.update = vi.fn();
+
+    await component.ngAfterViewInit();
+
+    expect(chartMock).toHaveBeenCalledTimes(1);
+    expect(chartInstance.data.datasets[0].data).toEqual([50, 50]);
+    expect(chartInstance.update).toHaveBeenCalledTimes(1);
   });
 });

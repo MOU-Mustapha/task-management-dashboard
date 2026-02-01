@@ -47,7 +47,7 @@ describe('TaskStatusChart', () => {
       imports: [
         TaskStatusChart,
         TranslateModule.forRoot({
-          defaultLanguage: 'en',
+          fallbackLang: 'en',
         }),
       ],
     }).compileComponents();

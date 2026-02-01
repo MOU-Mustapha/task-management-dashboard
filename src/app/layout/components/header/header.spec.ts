@@ -44,7 +44,7 @@ describe('Header', () => {
       imports: [
         Header,
         TranslateModule.forRoot({
-          defaultLanguage: 'en',
+          fallbackLang: 'en',
         }),
         FormsModule,
         PopoverModule,

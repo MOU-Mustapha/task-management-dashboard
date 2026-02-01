@@ -48,7 +48,7 @@ describe('TaskWeeklyChangeChart', () => {
       imports: [
         TaskWeeklyChangeChart,
         TranslateModule.forRoot({
-          defaultLanguage: 'en',
+          fallbackLang: 'en',
         }),
       ],
     }).compileComponents();

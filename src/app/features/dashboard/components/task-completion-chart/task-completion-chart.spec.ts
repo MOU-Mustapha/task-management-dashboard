@@ -52,7 +52,7 @@ describe('TaskCompletionChart', () => {
       imports: [
         TaskCompletionChart,
         TranslateModule.forRoot({
-          defaultLanguage: 'en',
+          fallbackLang: 'en',
         }),
       ],
     }).compileComponents();
@@ -91,5 +91,30 @@ describe('TaskCompletionChart', () => {
       responsive: true,
       scales: { x: { stacked: true }, y: { stacked: true } },
     });
+  });
+
+  it('should update existing Chart when ngAfterViewInit runs again', async () => {
+    component.chartData = baseData;
+    fixture.detectChanges();
+
+    // Initialize the chart first
+    await component.ngAfterViewInit();
+
+    // Change the data
+    component.chartData = {
+      completed: 5,
+      remaining: 5,
+    };
+
+    // Mock the chart instance to avoid DOM issues during update
+    const chartInstance = (component as unknown as { chart: Chart }).chart;
+    chartInstance.update = vi.fn();
+
+    await component.ngAfterViewInit();
+
+    expect(chartMock).toHaveBeenCalledTimes(1);
+    expect(chartInstance.data.datasets[0].data).toEqual([5]);
+    expect(chartInstance.data.datasets[1].data).toEqual([5]);
+    expect(chartInstance.update).toHaveBeenCalledTimes(1);
   });
 });

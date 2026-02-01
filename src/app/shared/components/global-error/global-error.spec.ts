@@ -31,7 +31,7 @@ describe('GlobalError', () => {
       imports: [
         GlobalError,
         TranslateModule.forRoot({
-          defaultLanguage: 'en',
+          fallbackLang: 'en',
         }),
         DialogModule,
         ButtonModule,
@@ -65,7 +65,7 @@ describe('GlobalError', () => {
         imports: [
           GlobalError,
           TranslateModule.forRoot({
-            defaultLanguage: 'en',
+            fallbackLang: 'en',
           }),
           DialogModule,
           ButtonModule,
@@ -216,7 +216,7 @@ describe('GlobalError', () => {
         imports: [
           GlobalError,
           TranslateModule.forRoot({
-            defaultLanguage: 'en',
+            fallbackLang: 'en',
           }),
           DialogModule,
           ButtonModule,
@@ -252,7 +252,7 @@ describe('GlobalError', () => {
         imports: [
           GlobalError,
           TranslateModule.forRoot({
-            defaultLanguage: 'en',
+            fallbackLang: 'en',
           }),
           DialogModule,
           ButtonModule,
@@ -287,7 +287,7 @@ describe('GlobalError', () => {
         imports: [
           GlobalError,
           TranslateModule.forRoot({
-            defaultLanguage: 'en',
+            fallbackLang: 'en',
           }),
           DialogModule,
           ButtonModule,
@@ -322,7 +322,7 @@ describe('GlobalError', () => {
         imports: [
           GlobalError,
           TranslateModule.forRoot({
-            defaultLanguage: 'en',
+            fallbackLang: 'en',
           }),
           DialogModule,
           ButtonModule,

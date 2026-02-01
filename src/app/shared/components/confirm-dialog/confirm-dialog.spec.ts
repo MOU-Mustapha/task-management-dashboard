@@ -14,7 +14,7 @@ describe('ConfirmDialog', () => {
       imports: [
         ConfirmDialog,
         TranslateModule.forRoot({
-          defaultLanguage: 'en',
+          fallbackLang: 'en',
         }),
         DialogModule,
       ],
