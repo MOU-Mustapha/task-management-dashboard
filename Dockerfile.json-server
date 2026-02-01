@@ -1,0 +1,5 @@
+FROM node:24-alpine
+WORKDIR /app
+COPY generate-data.js merge-data.js ./
+RUN npm install -g json-server
+CMD ["sh", "-c", "node generate-data.js && node merge-data.js && json-server db.json --host 0.0.0.0 --port 3000"]

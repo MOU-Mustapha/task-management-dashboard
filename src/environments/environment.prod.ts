@@ -12,6 +12,6 @@
  */
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:3000',
+  apiUrl: '/api', // handled with nginx when run the application with docker
   appName: 'Task Management Dashboard',
 };

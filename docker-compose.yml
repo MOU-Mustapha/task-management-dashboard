@@ -1,0 +1,30 @@
+# Containers
+services:
+  tasks_json_server:
+    build:
+      context: .
+      dockerfile: Dockerfile.json-server
+    container_name: tasks_json_server_container
+    networks:
+      - tasks_network
+    volumes:
+      - json_server_data:/app
+  tasks_frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tasks_frontend_container
+    depends_on:
+      - tasks_json_server
+    ports:
+      - '8090:80'
+    networks:
+      - tasks_network
+
+# Networks
+networks:
+  tasks_network:
+
+#Volumes
+volumes:
+  json_server_data:
