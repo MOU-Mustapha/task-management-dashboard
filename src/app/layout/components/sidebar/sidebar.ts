@@ -5,6 +5,16 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { TaskDialogService } from '../../../features/tasks/services/task-dialog.service';
 
+/**
+ * Application sidebar component.
+ *
+ * Responsibilities:
+ * - Renders main navigation modules
+ * - Provides access to task creation via a modal dialog
+ *
+ * Change Detection:
+ * - Uses OnPush strategy for optimized rendering and performance.
+ */
 @Component({
   selector: 'app-sidebar',
   imports: [CommonModule, RouterModule, ButtonModule, TranslateModule],

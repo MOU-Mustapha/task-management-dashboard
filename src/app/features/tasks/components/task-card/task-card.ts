@@ -1,11 +1,27 @@
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
-import { Task, TaskStatus } from '../../models/task.model';
+import { Task } from '../../models/task.model';
 import { TasksFacade } from '../../services/tasks.facade';
 import { CommonModule } from '@angular/common';
 import { TaskDialogService } from '../../services/task-dialog.service';
 import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/confirm-dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+/**
+ * Task Card Component
+ *
+ * Responsibilities:
+ * - Displays a single task with details.
+ * - Supports editing and deleting tasks with confirmation dialog.
+ * - Displays human-readable due date and completion status.
+ * - Applies styles for overdue, completed, in-progress, and priority levels.
+ * - Supports drag-and-drop via Angular CDK.
+ *
+ * Inputs:
+ * - `task: Task` - The task object to render. Required.
+ *
+ * Change Detection:
+ * - Uses OnPush strategy for optimized rendering and performance.
+ */
 @Component({
   selector: 'app-task-card',
   imports: [CommonModule, ConfirmDialog, DragDropModule],
@@ -19,13 +35,21 @@ export class TaskCard {
   isDragging: boolean = false;
   showDeleteDialog: boolean = false;
   @Input({ required: true }) task!: Task;
+  // Returns CSS class for priority styling
   get priorityClass(): string {
     return `priority-${this.task.priority}`;
   }
+  // Checks if task is overdue (and not done)
   get isOverdue(): boolean {
     return this.tasksFacade.isTaskOverdue(this.task);
   }
-
+  /**
+   * Returns a human-readable due date or completion status
+   * Examples:
+   * - "Due today", "Due tomorrow", "Due in X days"
+   * - "⚠ Overdue by X days"
+   * - "Completed today", "Completed yesterday", "Completed X days ago"
+   */
   get dueRelative(): string {
     const now = new Date();
     now.setHours(0, 0, 0, 0);
@@ -64,11 +88,7 @@ export class TaskCard {
   onDismissDelete() {
     this.showDeleteDialog = false;
   }
-  changeStatusTo(newStatus: TaskStatus): void {
-    if (newStatus !== this.task.status) {
-      // this.statusChange.emit({ taskId: this.task.id, newStatus });
-    }
-  }
+  // Returns formatted assignee name (first name) or 'Unassigned'
   get formattedAssignee(): string {
     return this.task.assignee?.name.split(' ')[0] ?? 'Unassigned';
   }

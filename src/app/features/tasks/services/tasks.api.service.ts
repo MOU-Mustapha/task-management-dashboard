@@ -4,6 +4,20 @@ import { httpResource } from '@angular/common/http';
 import { Task } from '../models/task.model';
 import { Observable } from 'rxjs';
 
+/**
+ * Tasks Api Service
+ *
+ * Responsibilities:
+ * - Handles all HTTP operations for the Task entity.
+ * - Provides a reactive `tasksResource` to keep the task list in sync across the app.
+ * - Exposes CRUD operations: create, update, delete.
+ * - Allows refreshing the task list by calling `reloadTasks`.
+ *
+ * Key Features:
+ * 1. Reactive resource (`tasksResource`) for easily binding tasks to UI components.
+ * 2. Methods return Observables to integrate seamlessly with Angular’s reactive patterns.
+ * 3. Centralized API endpoint management via `HttpClientService`.
+ */
 @Injectable({
   providedIn: 'root',
 })

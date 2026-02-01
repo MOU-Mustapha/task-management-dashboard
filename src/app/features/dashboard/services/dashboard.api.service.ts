@@ -3,6 +3,14 @@ import { inject, Injectable } from '@angular/core';
 import { Statistic } from '../models/statistics.model';
 import { HttpClientService } from '../../../core/http/http-config/http-client.service';
 
+/**
+ * Dashboard API service.
+ *
+ * Responsibilities:
+ * - Provides access to dashboard-related endpoints
+ * - Uses HttpClientService
+ * - Wraps the statistics endpoint in an httpResource for reactive access
+ */
 @Injectable({
   providedIn: 'root',
 })

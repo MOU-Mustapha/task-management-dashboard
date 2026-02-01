@@ -2,6 +2,17 @@ import { inject, Injectable, Injector } from '@angular/core';
 import { LoadingService } from './loading/loading.service';
 import { ErrorService } from './error/error.service';
 
+/**
+ * Application facade service for global utilities.
+ *
+ * Responsibilities:
+ * - Provides access to global services
+ * - Uses Angular Injector for dynamic retrieval to prevent cyclic dependencies
+ *
+ * Usage:
+ *   const appFacade = inject(AppFacadeService);
+ *   appFacade.______________.
+ */
 @Injectable({
   providedIn: 'root',
 })

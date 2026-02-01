@@ -10,6 +10,24 @@ import { Chart } from 'chart.js/auto';
 import { BarChartData } from '../../models/statistics.model';
 import { TranslateModule } from '@ngx-translate/core';
 
+/**
+ * Task Completion Chart Component
+ *
+ * Responsibilities:
+ * - Renders a horizontal stacked bar chart to visualize task completion.
+ * - Displays "Completed" vs "Remaining" tasks using Chart.js.
+ * - Updates chart dynamically if input `chartData` changes.
+ *
+ * Inputs:
+ * - `chartData` (BarChartData): Required data object.
+ *
+ * Lifecycle:
+ * - Implements AfterViewInit to initialize the Chart.js instance.
+ * - Updates existing chart data if the component is re-rendered.
+ *
+ * Change Detection:
+ * - Uses OnPush strategy for optimized rendering and performance.
+ */
 @Component({
   selector: 'app-task-completion-chart',
   imports: [TranslateModule],
@@ -18,8 +36,8 @@ import { TranslateModule } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskCompletionChart implements AfterViewInit {
-  @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
   @Input({ required: true }) chartData!: BarChartData;
+  @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
   private chart!: Chart;
   ngAfterViewInit(): void {
     if (!this.chart) {

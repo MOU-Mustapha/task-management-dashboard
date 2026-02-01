@@ -2,6 +2,18 @@ import { computed, inject, Injectable } from '@angular/core';
 import { DashboardApiService } from './dashboard.api.service';
 import { BarChartData, DonutChartData, weeklyChangesChartData } from '../models/statistics.model';
 
+/**
+ * Dashboard Facade Service
+ *
+ * Responsibilities:
+ * - Provides reactive access to dashboard statistics
+ * - Computes derived signals like total, completed, in-progress, and overdue tasks
+ * - Generates chart data models for:
+ *    • Task Distribution
+ *    • Completion Progress
+ *    • Weekly changes
+ *    • Risk Indicator
+ */
 @Injectable({
   providedIn: 'root',
 })

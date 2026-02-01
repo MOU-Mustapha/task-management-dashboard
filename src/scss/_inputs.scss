@@ -1,6 +1,6 @@
 @use 'variables.scss' as *;
 
-//Dropdown Styles
+// Dropdown Styles
 .dropdown {
   .p-select {
     min-width: 120px;
@@ -67,7 +67,7 @@
   }
 }
 
-//Input Styles
+// Input Styles
 .input-style {
   position: relative;
   display: flex;
@@ -107,37 +107,7 @@
   }
 }
 
-label {
-  font-size: 14px;
-  margin-bottom: 3px;
-  position: relative;
-  width: fit-content;
-  margin-left: 4px;
-  &.required::before {
-    content: '*';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    right: -10px;
-    color: $error-btn-color;
-    font-weight: bold;
-  }
-}
-
-.ar label {
-  margin-left: 0;
-  margin-right: 4px;
-  &.required::before {
-    right: auto;
-    left: -10px;
-  }
-}
-
-//Date Picker Styles
+// Date Picker Styles
 .calender {
   .p-component.p-datepicker {
     height: 38.6px;
@@ -171,4 +141,35 @@ label {
 }
 .p-datepicker-panel {
   width: fit-content !important;
+}
+
+// Label Styles
+label {
+  font-size: 14px;
+  margin-bottom: 3px;
+  position: relative;
+  width: fit-content;
+  margin-left: 4px;
+  &.required::before {
+    content: '*';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    right: -10px;
+    color: $error-btn-color;
+    font-weight: bold;
+  }
+}
+
+.ar label {
+  margin-left: 0;
+  margin-right: 4px;
+  &.required::before {
+    right: auto;
+    left: -10px;
+  }
 }

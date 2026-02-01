@@ -1,16 +1,42 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Chart } from 'chart.js/auto';
 
+/**
+ * Task Risk Chart Component
+ *
+ * Responsibilities:
+ * - Renders a donut chart showing the percentage of overdue tasks.
+ * - Visualizes the overdue ratio vs total tasks.
+ * - Updates dynamically if the input `overdueRatio` changes.
+ *
+ * Inputs:
+ * - `overdueRatio` (number): Required percentage of overdue tasks.
+ *
+ * Lifecycle:
+ * - Implements AfterViewInit to initialize the Chart.js instance.
+ * - Updates existing chart data if the component is re-rendered.
+ *
+ * Change Detection:
+ * - Uses OnPush strategy for optimized rendering and performance.
+ */
 @Component({
   selector: 'app-task-risk-chart',
   imports: [TranslateModule],
   templateUrl: './task-risk-chart.html',
   styleUrl: './task-risk-chart.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskRiskChart implements AfterViewInit {
-  @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
   @Input({ required: true }) overdueRatio!: number;
+  @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
   private chart!: Chart;
   ngAfterViewInit(): void {
     if (!this.chart) {

@@ -10,6 +10,24 @@ import { Chart } from 'chart.js/auto';
 import { weeklyChangesChartData } from '../../models/statistics.model';
 import { TranslateModule } from '@ngx-translate/core';
 
+/**
+ * TaskWeeklyChangeChart Component
+ *
+ * Responsibilities:
+ * - Renders a horizontal bar chart to visualize weekly changes in task metrics.
+ * - Supports dynamic coloring of bars based on type.
+ * - Updates dynamically if the input `chartData` changes.
+ *
+ * Inputs:
+ * - `chartData` (weeklyChangesChartData[]): Required array.
+ *
+ * Lifecycle:
+ * - Implements AfterViewInit to initialize Chart.js instance.
+ * - Updates chart data dynamically when component is re-rendered.
+ *
+ * Change Detection:
+ * - Uses OnPush strategy for optimized rendering and performance.
+ */
 @Component({
   selector: 'app-task-weekly-change-chart',
   imports: [TranslateModule],

@@ -3,6 +3,18 @@ import { GlobalSpinner } from './shared/components/global-spinner/global-spinner
 import { RouterModule } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
+/**
+ * Root application component.
+ *
+ * Responsibilities:
+ * - Initializes application language and text direction on startup
+ * - Includes global spinner component and router outlet
+ *
+ * Language handling:
+ * - Reads language from localStorage or defaults to 'en'
+ * - Sets translation service language
+ * - Updates document body and HTML attributes for direction and lang
+ */
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',

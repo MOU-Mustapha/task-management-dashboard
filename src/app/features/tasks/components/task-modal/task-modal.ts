@@ -17,6 +17,21 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { FieldError } from '../../../../shared/components/field-error/field-error';
 import { ValidationService } from '../../../../shared/services/validation.service';
 
+/**
+ * Task Modal Component
+ *
+ * Responsibilities:
+ * - Displays a modal dialog for creating or editing a Task.
+ * - Supports reactive form with validation for Task fields.
+ * - Pre-fills form when editing an existing task.
+ * - Handles adding and removing tags dynamically.
+ * - Maps form values to Task model payload for create/update.
+ * - Uses TasksFacade to persist task changes.
+ * - Closes modal after submission or cancellation.
+ *
+ * Change Detection:
+ * - Uses OnPush strategy for optimized rendering and performance.
+ */
 @Component({
   selector: 'app-task-modal',
   imports: [
@@ -41,6 +56,7 @@ export class TaskModal implements OnInit {
   showTagInputValidationMsg: boolean = false;
   readonly task = signal<Task | null>(this.dialogConfig.data?.task || null);
   readonly isEdit = computed(() => !!this.task());
+  // Reactive form group for task inputs
   readonly taskForm = this.fb.group<TaskFormControls>({
     title: this.fb.control(null, [Validators.required, Validators.minLength(3)]),
     description: this.fb.control(null, Validators.required),
@@ -54,11 +70,13 @@ export class TaskModal implements OnInit {
     assignee: this.fb.control(null, Validators.required),
     tags: this.fb.array<string>([], Validators.required),
   });
+  // Priority dropdown options
   readonly priorityOptions: Array<{ value: TaskPriority | 'all'; label: string }> = [
     { value: 'high', label: 'High' },
     { value: 'medium', label: 'Medium' },
     { value: 'low', label: 'Low' },
   ];
+  // Returns list of all assignees from TasksFacade
   get assignees() {
     return this.tasksFacade.assignees();
   }
@@ -66,12 +84,19 @@ export class TaskModal implements OnInit {
     this.validationService.setForm(this.taskForm);
     const task = this.task();
     if (task) {
+      // initializes the form with task data if editing
       this.setDataToForm(task);
     }
   }
+  // Getter for the tags FormArray
   get tags() {
     return this.taskForm.controls.tags;
   }
+  /**
+   * Adds a tag to the form
+   * Shows validation message if tag is empty
+   * @param tag string
+   */
   addTag(tag: string) {
     if (!tag || tag.trim() === '') {
       this.showTagInputValidationMsg = true;
@@ -79,9 +104,17 @@ export class TaskModal implements OnInit {
     }
     this.tags.push(this.fb.control(tag));
   }
+  /**
+   * Removes a tag at a given index
+   * @param index number
+   */
   removeTag(index: number) {
     this.tags.removeAt(index);
   }
+  /**
+   * Populates the form fields with the task data
+   * @param task Task
+   */
   private setDataToForm(task: Task) {
     this.taskForm.patchValue({
       title: task.title,
@@ -94,10 +127,19 @@ export class TaskModal implements OnInit {
     });
     this.setTags(task.tags);
   }
+  /**
+   * Sets the tags FormArray values
+   * @param tags string[]
+   */
   private setTags(tags: string[]) {
     this.tags.clear();
     tags.forEach((tag) => this.tags.push(this.fb.control(tag)));
   }
+  /**
+   * Maps the form values to a Task object for create/update
+   * @param form ReturnType<typeof this.taskForm.getRawValue>
+   * @returns Task
+   */
   private mapFormToPayload(form: ReturnType<typeof this.taskForm.getRawValue>): Task {
     const nowDate = new Date().toString();
     return {
@@ -114,6 +156,10 @@ export class TaskModal implements OnInit {
       completedAt: form.status === 'done' ? nowDate : (this.task()?.completedAt ?? ''),
     };
   }
+  /**
+   * Submits the form to create or update a task
+   * Closes the modal on successful submission
+   */
   submit() {
     if (this.taskForm.invalid) {
       this.taskForm.markAllAsTouched();

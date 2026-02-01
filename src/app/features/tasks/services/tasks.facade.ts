@@ -3,6 +3,15 @@ import { TasksApiService } from './tasks.api.service';
 import { Assignee, Task, TaskPriority, TaskStatus } from '../models/task.model';
 import { Observable, tap } from 'rxjs';
 
+/**
+ * Tasks Facade
+ *
+ * Responsibilities:
+ * - Acts as the single source of truth for all task-related data in the frontend.
+ * - Provides reactive state management for tasks using Angular signals and computed values.
+ * - Implements filtering, searching, grouping, and task status updates.
+ * - Wraps CRUD operations from TasksApiService and ensures the reactive task resource is updated automatically.
+ */
 @Injectable({
   providedIn: 'root',
 })

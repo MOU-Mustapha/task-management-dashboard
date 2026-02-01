@@ -1,5 +1,11 @@
 import { computed, Injectable, signal } from '@angular/core';
 
+/**
+ * Global loading state service based on reference counting.
+ *
+ * Uses a counter to support multiple concurrent operations.
+ * The `loading` signal becomes true when at least one operation is active.
+ */
 @Injectable({
   providedIn: 'root',
 })

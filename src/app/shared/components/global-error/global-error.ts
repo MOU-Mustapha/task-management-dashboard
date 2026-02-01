@@ -5,6 +5,19 @@ import { GlobalErrorObject } from '../../models/error.model';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TranslateModule } from '@ngx-translate/core';
 
+/**
+ * Global error dialog component.
+ *
+ * Responsibilities:
+ * - Displays a dynamic error message passed via `DynamicDialogConfig`
+ * - Provides a close method to dismiss the dialog
+ * - Supports translation via `TranslateModule`
+ *
+ * Change Detection:
+ * - Uses OnPush strategy for optimized rendering and performance.
+ *
+ * Usage (via DialogService from ErrorService):
+ */
 @Component({
   selector: 'app-global-error',
   imports: [DialogModule, ButtonModule, TranslateModule],
