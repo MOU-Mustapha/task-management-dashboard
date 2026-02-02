@@ -69,7 +69,7 @@ src/
 
 ### Prerequisites
 
-- Node.js 18+ (recommended: 20.x)
+- Node.js 20.19+ (recommended: 24.x)
 - npm 11.6.2+
 - Git
 
