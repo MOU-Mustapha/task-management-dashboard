@@ -48,6 +48,20 @@ describe('TaskColumn', () => {
 
   const mockTasks: Task[] = [mockTask];
 
+  const mockMultipleTasks: Task[] = [
+    mockTask,
+    {
+      ...mockTask,
+      id: '2',
+      title: 'Task 2',
+    },
+    {
+      ...mockTask,
+      id: '3',
+      title: 'Task 3',
+    },
+  ];
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TaskColumn, TranslateModule.forRoot()],
@@ -78,15 +92,51 @@ describe('TaskColumn', () => {
     expect(component.tasksCount).toBe(0);
   });
 
+  it('should handle null/undefined tasks gracefully', () => {
+    component.tasks = null as unknown as Task[];
+    expect(component.tasksCount).toBe(0);
+
+    component.tasks = undefined as unknown as Task[];
+    expect(component.tasksCount).toBe(0);
+  });
+
   describe('dragTask', () => {
-    it('should reorder tasks within the same container', () => {
+    it('should reorder tasks within the same container when indices are different', () => {
+      component.tasks = [...mockMultipleTasks]; // Create a copy
+      fixture.detectChanges();
+
       const emitSpy = vi.spyOn(component.taskDropped, 'emit');
+      const container = { id: 'column-todo', data: component.tasks };
       const mockEvent: MockDragEvent = {
-        previousContainer: { id: 'column-todo', data: mockTasks },
-        container: { id: 'column-todo', data: mockTasks },
+        previousContainer: container,
+        container: container,
+        previousIndex: 0,
+        currentIndex: 2,
+        item: { data: component.tasks[0] },
+        isPointerOverContainer: true,
+        distance: { x: 0, y: 0 },
+        dropPoint: { x: 0, y: 0 },
+        event: new Event('drop'),
+      };
+
+      component.dragTask(mockEvent as CdkDragDrop<Task[]>);
+
+      // Verify the array was reordered
+      expect(component.tasks[0]).toEqual(mockMultipleTasks[1]); // Task 2 moved to position 0
+      expect(component.tasks[1]).toEqual(mockMultipleTasks[2]); // Task 3 moved to position 1
+      expect(component.tasks[2]).toEqual(mockMultipleTasks[0]); // Task 1 moved to position 2
+      expect(emitSpy).not.toHaveBeenCalled();
+    });
+
+    it('should not reorder tasks when previousIndex equals currentIndex in same container', () => {
+      const emitSpy = vi.spyOn(component.taskDropped, 'emit');
+      const container = { id: 'column-todo', data: component.tasks };
+      const mockEvent: MockDragEvent = {
+        previousContainer: container,
+        container: container,
         previousIndex: 0,
         currentIndex: 0,
-        item: { data: mockTask },
+        item: { data: component.tasks[0] },
         isPointerOverContainer: true,
         distance: { x: 0, y: 0 },
         dropPoint: { x: 0, y: 0 },
@@ -97,13 +147,7 @@ describe('TaskColumn', () => {
 
       // Since previousIndex === currentIndex, array remains unchanged
       expect(component.tasks).toEqual(mockTasks);
-      expect(emitSpy).toHaveBeenCalledWith({
-        previousStatus: 'todo',
-        targetStatus: 'todo',
-        task: mockTask,
-        previousIndex: 0,
-        currentIndex: 0,
-      });
+      expect(emitSpy).not.toHaveBeenCalled();
     });
 
     it('should emit taskDropped when moving between containers', () => {

@@ -51,7 +51,7 @@ export class TaskColumn {
   }>();
   // Returns the number of tasks in the column
   get tasksCount(): number {
-    return this.tasks.length ?? 0;
+    return this.tasks?.length || 0;
   }
   /**
    * Handles drag-and-drop of tasks
