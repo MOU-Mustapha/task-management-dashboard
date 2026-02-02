@@ -26,17 +26,23 @@ export class TasksFacade {
   readonly tasks = computed(() => this.tasksApi.tasksResource.value() ?? []);
   // Derived State
   readonly filteredTasks = computed(() => {
-    return this.tasks().filter((t) => {
-      const matchesStatus = this.statusFilter() === 'all' || t.status === this.statusFilter();
-      const matchesPriority =
-        this.priorityFilter() === 'all' || t.priority === this.priorityFilter();
-      const matchesAssignee =
-        this.assigneeFilter() === 'all' || t.assignee.id === this.assigneeFilter();
-      const matchesSearchTerm =
-        t.title.toLowerCase().includes(this.searchTerm().toLowerCase()) ||
-        t.description.toLowerCase().includes(this.searchTerm().toLowerCase());
-      return matchesStatus && matchesPriority && matchesAssignee && matchesSearchTerm;
-    });
+    return this.tasks()
+      .filter((t) => {
+        const matchesStatus = this.statusFilter() === 'all' || t.status === this.statusFilter();
+        const matchesPriority =
+          this.priorityFilter() === 'all' || t.priority === this.priorityFilter();
+        const matchesAssignee =
+          this.assigneeFilter() === 'all' || t.assignee.id === this.assigneeFilter();
+        const matchesSearchTerm =
+          t.title.toLowerCase().includes(this.searchTerm().toLowerCase()) ||
+          t.description.toLowerCase().includes(this.searchTerm().toLowerCase());
+        return matchesStatus && matchesPriority && matchesAssignee && matchesSearchTerm;
+      })
+      .sort((a, b) => {
+        const aDate = new Date(a.updatedAt || a.createdAt).getTime();
+        const bDate = new Date(b.updatedAt || b.createdAt).getTime();
+        return bDate - aDate;
+      });
   });
   // Group Tasks by Status
   readonly todo = computed(() => this.filteredTasks().filter((t) => t.status === 'todo'));

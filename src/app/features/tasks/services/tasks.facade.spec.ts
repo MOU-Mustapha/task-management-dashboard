@@ -126,7 +126,12 @@ describe('TasksFacade', () => {
       facade.setAssigneeFilter('a1');
       facade.setSearch('Task');
       facade.clearFilters();
-      expect(facade.filteredTasks()).toEqual(mockTasks);
+      const expectedSorted = [...mockTasks].sort((a, b) => {
+        const aDate = new Date(a.updatedAt || a.createdAt).getTime();
+        const bDate = new Date(b.updatedAt || b.createdAt).getTime();
+        return bDate - aDate;
+      });
+      expect(facade.filteredTasks()).toEqual(expectedSorted);
     });
   });
 
@@ -188,6 +193,104 @@ describe('TasksFacade', () => {
   describe('assignees', () => {
     it('should return unique assignees', () => {
       expect(facade.assignees()).toEqual([mockAssigneeA, mockAssigneeB]);
+    });
+  });
+
+  describe('sorting', () => {
+    it('should sort filteredTasks by updatedAt in descending order', () => {
+      const tasksWithDifferentDates: Task[] = [
+        {
+          ...mockTasks[0],
+          id: '1',
+          updatedAt: '2025-01-01T00:00:00Z',
+        },
+        {
+          ...mockTasks[1],
+          id: '2',
+          updatedAt: '2025-01-03T00:00:00Z',
+        },
+        {
+          ...mockTasks[2],
+          id: '3',
+          updatedAt: '2025-01-02T00:00:00Z',
+        },
+      ];
+
+      tasksApiMock.tasksResource.value.mockReturnValue(tasksWithDifferentDates);
+
+      const filtered = facade.filteredTasks();
+
+      expect(filtered).toEqual([
+        tasksWithDifferentDates[1], // 2025-01-03 (newest)
+        tasksWithDifferentDates[2], // 2025-01-02
+        tasksWithDifferentDates[0], // 2025-01-01 (oldest)
+      ]);
+    });
+
+    it('should sort by createdAt when updatedAt is not available', () => {
+      const tasksWithoutUpdatedAt: Task[] = [
+        {
+          ...mockTasks[0],
+          id: '1',
+          createdAt: '2025-01-01T00:00:00Z',
+          updatedAt: '',
+        },
+        {
+          ...mockTasks[1],
+          id: '2',
+          createdAt: '2025-01-03T00:00:00Z',
+          updatedAt: '',
+        },
+        {
+          ...mockTasks[2],
+          id: '3',
+          createdAt: '2025-01-02T00:00:00Z',
+          updatedAt: '',
+        },
+      ];
+
+      tasksApiMock.tasksResource.value.mockReturnValue(tasksWithoutUpdatedAt);
+
+      const filtered = facade.filteredTasks();
+
+      expect(filtered).toEqual([
+        tasksWithoutUpdatedAt[1], // 2025-01-03 (newest)
+        tasksWithoutUpdatedAt[2], // 2025-01-02
+        tasksWithoutUpdatedAt[0], // 2025-01-01 (oldest)
+      ]);
+    });
+
+    it('should maintain sorting when filters are applied', () => {
+      const tasksWithDifferentDates: Task[] = [
+        {
+          ...mockTasks[0],
+          id: '1',
+          status: 'todo',
+          updatedAt: '2025-01-01T00:00:00Z',
+        },
+        {
+          ...mockTasks[1],
+          id: '2',
+          status: 'todo',
+          updatedAt: '2025-01-03T00:00:00Z',
+        },
+        {
+          ...mockTasks[2],
+          id: '3',
+          status: 'done',
+          updatedAt: '2025-01-02T00:00:00Z',
+        },
+      ];
+
+      tasksApiMock.tasksResource.value.mockReturnValue(tasksWithDifferentDates);
+
+      facade.setStatusFilter('todo');
+      const filtered = facade.filteredTasks();
+
+      expect(filtered).toEqual([
+        tasksWithDifferentDates[1], // 2025-01-03 (newest todo)
+        tasksWithDifferentDates[0], // 2025-01-01 (older todo)
+      ]);
     });
   });
 

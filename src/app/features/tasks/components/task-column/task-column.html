@@ -6,6 +6,8 @@
   <div
     class="tasks-container"
     cdkDropList
+    cdkScrollable
+    cdkDropListOrientation="vertical"
     [cdkDropListData]="tasks"
     [id]="columnId"
     [cdkDropListConnectedTo]="connectedIds"
