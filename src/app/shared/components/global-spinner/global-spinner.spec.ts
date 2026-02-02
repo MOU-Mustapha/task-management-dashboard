@@ -18,9 +18,6 @@ describe('GlobalSpinner', () => {
 
     mockLoadingService = {
       loading: mockLoadingSignal,
-      start: vi.fn(),
-      stop: vi.fn(),
-      reset: vi.fn(),
     } as unknown as LoadingService;
 
     mockAppFacadeService = {
@@ -215,9 +212,6 @@ describe('GlobalSpinner', () => {
             useValue: {
               loadingService: {
                 loading: vi.fn().mockReturnValue(undefined),
-                start: vi.fn(),
-                stop: vi.fn(),
-                reset: vi.fn(),
               },
             },
           },
@@ -241,9 +235,6 @@ describe('GlobalSpinner', () => {
             useValue: {
               loadingService: {
                 loading: vi.fn().mockReturnValue(null),
-                start: vi.fn(),
-                stop: vi.fn(),
-                reset: vi.fn(),
               },
             },
           },

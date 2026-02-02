@@ -31,10 +31,6 @@ describe('Sidebar', () => {
 
   const mockActivatedRoute = {
     snapshot: {},
-    params: of({}),
-    queryParams: of({}),
-    url: of({}),
-    data: of({}),
   };
 
   beforeEach(async () => {

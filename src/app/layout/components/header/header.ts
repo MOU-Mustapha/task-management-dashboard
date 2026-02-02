@@ -25,7 +25,7 @@ import { PopoverModule } from 'primeng/popover';
 })
 export class Header {
   private readonly translateService = inject(TranslateService);
-  private readonly tasksFacade = inject(TasksFacade);
+  readonly tasksFacade = inject(TasksFacade);
   private readonly router = inject(Router);
   /**
    * Toggles application language between English and Arabic.
@@ -49,10 +49,9 @@ export class Header {
     document.body.lang = nextLang;
   }
   /**
-   * Updates the task search term and navigates to the tasks page if not already there.
+   * Navigates to the tasks page if not already there.
    */
-  onSearch(value: string) {
-    this.tasksFacade.setSearch(value);
+  onSearch() {
     if (!this.router.url.includes('/tasks')) this.router.navigate(['/tasks']);
   }
 }

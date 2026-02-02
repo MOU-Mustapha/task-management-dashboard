@@ -17,7 +17,8 @@
       id="search"
       type="search"
       [placeholder]="'searchPlaceHolder' | translate"
-      (input)="onSearch($event.target.value)"
+      [(ngModel)]="tasksFacade.searchTerm"
+      (input)="onSearch()"
     />
   </div>
   <div class="right col-md-4 col-1 d-flex align-items-center justify-content-end">

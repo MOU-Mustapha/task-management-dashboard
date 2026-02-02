@@ -21,7 +21,7 @@ export class TasksFacade {
   private statusFilter = signal<TaskStatus | 'all'>('all');
   private priorityFilter = signal<TaskPriority | 'all'>('all');
   private assigneeFilter = signal<string | 'all'>('all');
-  private searchTerm = signal<string>('');
+  searchTerm = signal<string>('');
   // Data Source
   readonly tasks = computed(() => this.tasksApi.tasksResource.value() ?? []);
   // Derived State

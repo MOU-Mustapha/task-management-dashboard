@@ -33,10 +33,6 @@ describe('Header', () => {
 
   const mockActivatedRoute = {
     snapshot: {},
-    params: of({}),
-    queryParams: of({}),
-    url: of({}),
-    data: of({}),
   };
 
   beforeEach(async () => {
@@ -129,28 +125,27 @@ describe('Header', () => {
   });
 
   describe('onSearch', () => {
-    it('should set search term', () => {
-      const searchValue = 'test search';
-
-      component.onSearch(searchValue);
-
-      expect(mockTasksFacade.setSearch).toHaveBeenCalledWith(searchValue);
+    beforeEach(() => {
+      vi.clearAllMocks();
     });
 
-    it('should handle empty search term', () => {
-      const searchValue = '';
-
-      component.onSearch(searchValue);
-
-      expect(mockTasksFacade.setSearch).toHaveBeenCalledWith('');
+    it('should navigate to /tasks if current url dose not include /tasks', () => {
+      vi.spyOn(mockRouter, 'navigate');
+      Object.defineProperty(mockRouter, 'url', {
+        get: () => '/dashboard',
+        configurable: true,
+      });
+      component.onSearch();
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['/tasks']);
     });
-
-    it('should handle search term with special characters', () => {
-      const searchValue = 'test@#$%^&*()';
-
-      component.onSearch(searchValue);
-
-      expect(mockTasksFacade.setSearch).toHaveBeenCalledWith(searchValue);
+    it('should not navigate if current url includes /tasks', () => {
+      vi.spyOn(mockRouter, 'navigate');
+      Object.defineProperty(mockRouter, 'url', {
+        get: () => '/tasks',
+        configurable: true,
+      });
+      component.onSearch();
+      expect(mockRouter.navigate).not.toHaveBeenCalled();
     });
   });
 
