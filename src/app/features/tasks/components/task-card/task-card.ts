@@ -32,7 +32,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 export class TaskCard {
   private readonly tasksFacade = inject(TasksFacade);
   private readonly taskDialogService = inject(TaskDialogService);
-  isDragging: boolean = false;
   showDeleteDialog: boolean = false;
   @Input({ required: true }) task!: Task;
   // Returns CSS class for priority styling

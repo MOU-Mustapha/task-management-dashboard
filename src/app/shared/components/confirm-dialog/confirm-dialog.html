@@ -4,6 +4,7 @@
   [style]="{ width: '25rem' }"
   draggable="false"
   header="Confirmation"
+  (onHide)="hideDialog()"
 >
   <div>
     <p>{{ message | translate }}</p>
